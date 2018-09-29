@@ -8,35 +8,36 @@ import com.cg.lms.bean.CustomerDetails;
 import com.cg.lms.bean.EndUser;
 import com.cg.lms.bean.LoanApplication;
 import com.cg.lms.bean.LoanProgramsOffered;
+import com.cg.lms.exception.LoanException;
 
 public interface LoanManagementService {
 	
 	
 	//These are the methods accessible to the admin and lad
-	public int login(String username, String password);
+	public int login(String username, String password) throws LoanException;
 	
 	//These are the methods accessible to the admin
-	public int addLoanProgram(LoanProgramsOffered loanPrograms);
+	public int addLoanProgram(LoanProgramsOffered loanPrograms) throws LoanException;
 	public int deleteLoanProgram(String programName);
-	public int updateLoanProgram(LoanProgramsOffered loanPrograms);
-	public ArrayList<LoanApplication> viewAcceptedLoans();
-	public ArrayList<LoanApplication> viewRejectedLoans();
-	public ArrayList<ApprovedLoans> viewApprovedLoans();
+	public int updateLoanProgram(LoanProgramsOffered loanPrograms) throws LoanException;
+	public ArrayList<LoanApplication> viewAcceptedLoans() throws LoanException;
+	public ArrayList<LoanApplication> viewRejectedLoans() throws LoanException;
+	public ArrayList<ApprovedLoans> viewApprovedLoans() throws LoanException;
 	
 	//These are the methods accessible to the lad
-	public ArrayList<LoanApplication> viewApplicationByLoanProgram(String programName);
-	public int updateApplicationStatus(int appId, String newStatus, Timestamp date);//change satus, add date
-	public int setStatusAfterInterview(int appId, String newStatus);
+	public ArrayList<LoanApplication> viewApplicationByLoanProgram(String programName) throws LoanException;
+	public int updateApplicationStatus(int appId, String newStatus, Timestamp date) throws LoanException;//change satus, add date
+	public int setStatusAfterInterview(int appId, String newStatus) throws LoanException;
 	
 	//These methods are for the customer
-	public int addCustomerDetails(CustomerDetails custDetails, LoanApplication loanApp);
-	public LoanApplication viewApplicationStatusById(int id);
+	public int addCustomerDetails(CustomerDetails custDetails, LoanApplication loanApp) throws LoanException;
+	public LoanApplication viewApplicationStatusById(int id) throws LoanException;
 	
 	//methods for everyone
-	public ArrayList<LoanProgramsOffered> viewLoanProgramOffered();
+	public ArrayList<LoanProgramsOffered> viewLoanProgramOffered() throws LoanException;
 	
 	//utilitymethod
-	public LoanProgramsOffered getLoanProgramByName(String loanName);
+	public LoanProgramsOffered getLoanProgramByName(String loanName) throws LoanException;
 	
 	
 }
