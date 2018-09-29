@@ -37,7 +37,7 @@ public class DBUtil {
 	public static Properties loadDBInfo() throws IOException
 	{
 		
-			FileReader fr = new FileReader("D://Dhruv Phansalkar//ClinicSoftwareApplication//DbInfo.properties");
+			FileReader fr = new FileReader("DbInfo.properties");
 			Properties dbProps = new Properties();
 			dbProps.load(fr);
 			return dbProps;
