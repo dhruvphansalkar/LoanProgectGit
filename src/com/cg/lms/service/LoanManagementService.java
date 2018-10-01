@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import com.cg.lms.bean.ApprovedLoans;
 import com.cg.lms.bean.CustomerDetails;
-import com.cg.lms.bean.EndUser;
+import com.cg.lms.bean.EndUsers;
 import com.cg.lms.bean.LoanApplication;
 import com.cg.lms.bean.LoanProgramsOffered;
 import com.cg.lms.exception.LoanException;

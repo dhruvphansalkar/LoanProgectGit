@@ -1,6 +1,6 @@
 package com.cg.lms.bean;
 
-public class EndUser {
+public class EndUsers {
 	String login_id;
 	String password;
 	String role;
@@ -27,13 +27,13 @@ public class EndUser {
 		return "EndUser [login_id=" + login_id + ", password=" + password
 				+ ", role=" + role + "]";
 	}
-	public EndUser(String login_id, String password, String role) {
+	public EndUsers(String login_id, String password, String role) {
 		super();
 		this.login_id = login_id;
 		this.password = password;
 		this.role = role;
 	}
-	public EndUser() {
+	public EndUsers() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
