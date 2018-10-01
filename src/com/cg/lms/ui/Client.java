@@ -1,11 +1,13 @@
 package com.cg.lms.ui;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.cg.lms.bean.LoanProgramsOffered;
 import com.cg.lms.exception.LoanException;
 import com.cg.lms.service.LoanManagementService;
 import com.cg.lms.service.LoanManagementServiceImpl;
+
 
 public class Client {
 	static LoanManagementService lService=null;
@@ -53,15 +55,13 @@ public class Client {
 						int c=sc.nextInt();
 						switch(c)
 						{
-							case 1:
+							case 1:displayAllLoans();
 								break;
-							case 2:
-								insertLoan();
+							case 2:insertLoan();
 								break;
-							case 3:
-								deleteLoan();
+							case 3:deleteLoan();
 								break;
-							case 4:
+							case 4:updateLoan();
 								break;
 							case 5:
 								break;
@@ -107,6 +107,59 @@ public class Client {
 		}
 		
 	}
+	private static void displayAllLoans() 
+	{
+		ArrayList<LoanProgramsOffered> loanList;
+		// TODO Auto-generated method stub
+		try {
+			loanList=lService.viewLoanProgramOffered();
+			System.out.println("\tProgramName \tdescription \ttype \tdurationinyears \tminloanamount \tmaxloanamount \trateofinterest \tproofs_required");
+			for(LoanProgramsOffered l:loanList)
+			{
+				System.out.println("\t"+l.getProgramName()+"\t"+l.getDescription()+"\t"+l.getType()+"\t"+l.getDurationinyears()+"\t"+l.getMinloanamount()+"\t"+l.getMaxloanamount()+"\t"+l.getRateofinterest()+"\t"+l.getProofs_required());
+			}
+		} catch (LoanException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private static void updateLoan()
+	{
+		System.out.println("Enter Loan Program you want to update:");
+		String loanProg=sc.next();
+		
+		System.out.println("Enter new Description:");
+		String desc=sc.next();
+		System.out.println("Enter new Type:");
+		String type=sc.next();
+		System.out.println("Enter new duration in years:");
+		int duration=sc.nextInt();
+		System.out.println("Enter new minimum loan amount:");
+		double min=sc.nextDouble();
+		System.out.println("Enter new maximum loan amount:");
+		double max=sc.nextDouble();
+		System.out.println("Enter new interest rate:");
+		double rate=sc.nextDouble();
+		System.out.println("Enter new Proofs Required:");
+		String proof=sc.next();
+		
+		LoanProgramsOffered obj=new LoanProgramsOffered(loanProg,desc,type,duration,min,max,rate,proof);
+		
+		int dataUpdated;
+		try {
+			dataUpdated = lService.updateLoanProgram(obj);
+			if(dataUpdated==0)
+				System.out.println("Sorry,data not Updated");
+			if(dataUpdated==1)
+				System.out.println("data updated");
+		} catch (LoanException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 	private static void insertLoan()
 	{
 		System.out.println("Enter Loan Program:");
@@ -150,7 +203,7 @@ public class Client {
 		}
 		catch (LoanException e) 
 		{
-			
+			e.printStackTrace();
 		}
 	}
 

@@ -101,7 +101,7 @@ public class LoanManagementServiceImpl implements LoanManagementService
 	public ArrayList<LoanProgramsOffered> viewLoanProgramOffered()
 			throws LoanException {
 		// TODO Auto-generated method stub
-		return null;
+		return ldao.viewLoanProgramOffered();
 	}
 
 	@Override
