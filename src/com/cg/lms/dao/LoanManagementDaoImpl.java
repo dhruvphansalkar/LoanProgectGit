@@ -121,14 +121,52 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 
 	@Override
 	public ArrayList<LoanApplication> viewAcceptedLoans() throws LoanException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<LoanApplication> Llist=null;
+		try {
+			con=DBUtil.getConn();
+			String selectQry="select * from LoanApplication where Status='accepted'";
+			st=con.createStatement();
+			rs=st.executeQuery(selectQry);
+			while(rs.next())
+			{
+				Llist.add(new LoanApplication(rs.getInt("Application_Id"),
+						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
+						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new LoanException(e.getMessage());
+		}
+		
+		return Llist;
 	}
 
 	@Override
 	public ArrayList<LoanApplication> viewRejectedLoans() throws LoanException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<LoanApplication> Llist=null;
+		try {
+			con=DBUtil.getConn();
+			String selectQry="select * from LoanApplication where Status='rejected'";
+			st=con.createStatement();
+			rs=st.executeQuery(selectQry);
+			while(rs.next())
+			{
+				Llist.add(new LoanApplication(rs.getInt("Application_Id"),
+						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
+						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new LoanException(e.getMessage());
+		}
+		
+		return Llist;
 	}
 
 	@Override
@@ -163,9 +201,30 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	}
 
 	@Override
-	public LoanApplication viewApplicationStatusById(int id) throws LoanException {
-		// TODO Auto-generated method stub
-		return null;
+	public LoanApplication viewApplicationStatusById(int id) throws LoanException
+	{
+		LoanApplication obj=null;
+		try {
+			con=DBUtil.getConn();
+			String selectQry="select * from LoanApplication where Application_Id=?";
+			pst=con.prepareStatement(selectQry);
+			pst.setInt(1,id);
+			rs = pst.executeQuery();
+			while(rs.next())
+			{
+				obj=new LoanApplication(rs.getInt("Application_Id"),
+						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
+						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview"));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new LoanException(e.getMessage());
+		}
+		
+		return obj;
 	}
 
 	@Override
