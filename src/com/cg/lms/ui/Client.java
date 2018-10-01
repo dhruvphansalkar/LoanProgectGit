@@ -59,6 +59,7 @@ public class Client {
 								insertLoan();
 								break;
 							case 3:
+								deleteLoan();
 								break;
 							case 4:
 								break;
@@ -138,6 +139,19 @@ public class Client {
 		}
 		
 	}
-	
+	private static void deleteLoan()
+	{
+		System.out.println("Enter the Loan Name which you want to delete");
+		String loanName=sc.nextLine();
+		int tupleDeleted;
+		try
+		{
+			tupleDeleted= lService.deleteLoanProgram(loanName);
+		}
+		catch (LoanException e) 
+		{
+			
+		}
+	}
 
 }
