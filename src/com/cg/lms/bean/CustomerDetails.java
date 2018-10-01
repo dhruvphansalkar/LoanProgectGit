@@ -1,11 +1,12 @@
 package com.cg.lms.bean;
 
-import java.util.Date;
+import java.sql.Timestamp;
+
 
 public class CustomerDetails {
 	int Application_Id; 
 	String Applicant_name;
-	Date date_of_birth;
+	Timestamp date_of_birth;
 	String marital_status; 
 	int phone_number;
 	int mobile_number;
@@ -23,12 +24,10 @@ public class CustomerDetails {
 	public void setApplicant_name(String applicant_name) {
 		Applicant_name = applicant_name;
 	}
-	public Date getDate_of_birth() {
+	public Timestamp getDate_of_birth() {
 		return date_of_birth;
 	}
-	public void setDate_of_birth(Date date_of_birth) {
-		this.date_of_birth = date_of_birth;
-	}
+	
 	public String getMarital_status() {
 		return marital_status;
 	}
@@ -69,7 +68,7 @@ public class CustomerDetails {
 				+ ", email_id=" + email_id + "]";
 	}
 	public CustomerDetails(int application_Id, String applicant_name,
-			Date date_of_birth, String marital_status, int phone_number,
+			Timestamp date_of_birth, String marital_status, int phone_number,
 			int mobile_number, int countofDependents, String email_id) {
 		super();
 		Application_Id = application_Id;
@@ -80,6 +79,9 @@ public class CustomerDetails {
 		this.mobile_number = mobile_number;
 		CountofDependents = countofDependents;
 		this.email_id = email_id;
+	}
+	public void setDate_of_birth(Timestamp date_of_birth) {
+		this.date_of_birth = date_of_birth;
 	}
 	public CustomerDetails() {
 		super();

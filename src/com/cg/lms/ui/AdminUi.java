@@ -14,6 +14,9 @@ public class AdminUi {
 	public void adminUiMethod()
 	{
 		lService= new LoanManagementServiceImpl();
+		System.out.println("********Admin Login Page*********");
+		System.out.println();
+		System.out.println();
 		System.out.println("Enter your login id:");
 		String username=sc.next();
 		System.out.println("Enter your password:");
@@ -60,6 +63,16 @@ public class AdminUi {
 						default:
 							System.out.println("Wrong Choice");
 					}
+				System.out.println("Welcome Admin");
+				System.out.println("Select Operation to be performed:");
+				System.out.println("1)View all loan Programs \n"
+						+ "2)Add a new loan Program \n"
+						+ "3)Delete an existing loan Program \n"
+						+ "4)Update an existing loan Program \n"
+						+ "5)View all acccepted loans \n"
+						+ "6)View all rejected loans \n"
+						+ "7)View all approved loans \n"
+						+ "8)EXIT");
 				System.out.println("Enter your choice:");
 				c=sc.nextInt();
 				}while(c!=8);

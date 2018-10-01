@@ -130,10 +130,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			while(rs.next())
 			{
 				Llist.add(new LoanApplication(rs.getInt("Application_Id"),
-						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						rs.getTimestamp("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
 						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
 						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
-						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getTimestamp("DateOfInterview")));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -155,10 +155,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			while(rs.next())
 			{
 				Llist.add(new LoanApplication(rs.getInt("Application_Id"),
-						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						rs.getTimestamp("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
 						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
 						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
-						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getTimestamp("DateOfInterview")));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -215,8 +215,25 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	}
 
 	@Override
-	public int addCustomerDetails(CustomerDetails custDetails, LoanApplication loanApp) throws LoanException {
-		// TODO Auto-generated method stub
+	public int addCustomerDetails(CustomerDetails custDetails, LoanApplication loanApp) throws LoanException 
+	{
+		try 
+		{
+			String insertQry="insert into CustomerDetails values (?,?,?,?,?,?,?,?)";
+			pst=con.prepareStatement(insertQry);
+			pst.setInt(1, custDetails.getApplication_Id());
+			pst.setString(2, custDetails.getApplicant_name());
+			pst.setTimestamp(3, custDetails.getDate_of_birth());
+			pst.setString(4, custDetails.getMarital_status());
+			pst.setInt(5, custDetails.getPhone_number());
+			pst.setInt(6, custDetails.getMobile_number());
+			pst.setInt(7,custDetails.getCountofDependents());
+			pst.setString(8, custDetails.getEmail_id());
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
@@ -233,10 +250,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			while(rs.next())
 			{
 				obj=new LoanApplication(rs.getInt("Application_Id"),
-						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						rs.getTimestamp("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
 						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
 						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
-						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview"));
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getTimestamp("DateOfInterview"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
