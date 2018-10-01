@@ -2,6 +2,7 @@ package com.cg.lms.bean;
 
 
 
+import java.sql.Date;
 import java.sql.Timestamp;
  //sql option is also present
 
@@ -85,14 +86,14 @@ public class LoanApplication {
 	public void setDateOfInterview(Timestamp dateOfInterview) {
 		DateOfInterview = dateOfInterview;
 	}
-	public LoanApplication(int application_Id, Timestamp application_date,
+	public LoanApplication(int application_Id, Timestamp date,
 			String loan_program, int amountofLoan, String addressofProperty,
 			int annualFamilyIncome, String documentProofsAvailable,
 			String guaranteeCover, int marketValueofGuaranteeCover,
-			String status, Timestamp dateOfInterview) {
+			String status, Timestamp date2) {
 		super();
 		Application_Id = application_Id;
-		this.application_date = application_date;
+		this.application_date = date;
 		Loan_program = loan_program;
 		AmountofLoan = amountofLoan;
 		AddressofProperty = addressofProperty;
@@ -101,7 +102,7 @@ public class LoanApplication {
 		GuaranteeCover = guaranteeCover;
 		MarketValueofGuaranteeCover = marketValueofGuaranteeCover;
 		Status = status;
-		DateOfInterview = dateOfInterview;
+		DateOfInterview = date2;
 	}
 	public LoanApplication() {
 		super();
