@@ -170,9 +170,29 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	}
 
 	@Override
-	public ArrayList<ApprovedLoans> viewApprovedLoans() throws LoanException {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ApprovedLoans> viewApprovedLoans() throws LoanException
+	{
+		ArrayList<ApprovedLoans> Llist=null;
+		try {
+			con=DBUtil.getConn();
+			String selectQry="select * from ApprovedLoans";
+			st=con.createStatement();
+			rs=st.executeQuery(selectQry);
+			while(rs.next())
+			{
+				Llist.add(new ApprovedLoans(rs.getInt("Application_Id"),
+						rs.getString("Customer_name"),rs.getInt("amountofloangranted")
+						,rs.getInt("monthlyinstallment"),rs.getInt("yearstimeperiod"),
+						rs.getInt("downpayment"),
+						rs.getInt("rateofinterest"),rs.getInt("totalamountpayable")));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new LoanException(e.getMessage());
+		}
+		
+		return Llist;
 	}
 
 	@Override
