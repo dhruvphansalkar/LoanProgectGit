@@ -27,7 +27,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	int data=0;
 
 	@Override
-	public int login(String username, String Password)
+	public int login(String username, String Password) //Tested and working
 	{
 		try {
 			con=DBUtil.getConn();
@@ -49,7 +49,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	}
 
 	@Override
-	public int addLoanProgram(LoanProgramsOffered loanPrograms)
+	public int addLoanProgram(LoanProgramsOffered loanPrograms) //Not tested
 			throws LoanException {
 		// TODO Auto-generated method stub
 		return 0;
@@ -57,8 +57,21 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 
 	@Override
 	public int deleteLoanProgram(String programName) throws LoanException {
-		// TODO Auto-generated method stub
-		return 0;
+		int returnval=0;
+		try 
+		{
+			
+			con=DBUtil.getConn();
+			String selectQry="delete from LoanProgramsOffered where ProgramName=?";
+			pst=con.prepareStatement(selectQry);
+			pst.setString(1,programName);
+			returnval=pst.executeUpdate();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return returnval;
 	}
 
 	@Override
