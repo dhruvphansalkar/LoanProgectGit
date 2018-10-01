@@ -219,8 +219,9 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	{
 		try 
 		{
-			String insertQry="insert into CustomerDetails values (?,?,?,?,?,?,?,?)";
-			pst=con.prepareStatement(insertQry);
+			
+			String insertQry1="insert into CustomerDetails values (?,?,?,?,?,?,?,?)";
+			pst=con.prepareStatement(insertQry1);
 			pst.setInt(1, custDetails.getApplication_Id());
 			pst.setString(2, custDetails.getApplicant_name());
 			pst.setTimestamp(3, custDetails.getDate_of_birth());
@@ -229,6 +230,9 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			pst.setInt(6, custDetails.getMobile_number());
 			pst.setInt(7,custDetails.getCountofDependents());
 			pst.setString(8, custDetails.getEmail_id());
+			data = pst.executeUpdate();
+			
+			String insertQry2="insert into LoanApllication() values (?,?,?,?,?,?,?,?)";
 		}
 		catch(Exception e)
 		{
