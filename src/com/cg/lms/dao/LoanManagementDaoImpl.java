@@ -130,10 +130,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			while(rs.next())
 			{
 				Llist.add(new LoanApplication(rs.getInt("Application_Id"),
-						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						rs.getTimestamp("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
 						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
 						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
-						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getTimestamp("DateOfInterview")));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -155,10 +155,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			while(rs.next())
 			{
 				Llist.add(new LoanApplication(rs.getInt("Application_Id"),
-						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						rs.getTimestamp("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
 						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
 						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
-						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getTimestamp("DateOfInterview")));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -250,10 +250,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			while(rs.next())
 			{
 				obj=new LoanApplication(rs.getInt("Application_Id"),
-						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						rs.getTimestamp("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
 						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
 						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
-						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview"));
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getTimestamp("DateOfInterview"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
