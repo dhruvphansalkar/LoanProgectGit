@@ -2,11 +2,12 @@ package com.cg.lms.bean;
 
 
 
-import java.util.Date; //sql option is also present
+import java.sql.Timestamp;
+ //sql option is also present
 
 public class LoanApplication {
 	int Application_Id;
-	Date application_date;
+	Timestamp application_date;
 	String Loan_program;
 	int AmountofLoan;
 	String AddressofProperty;
@@ -15,17 +16,18 @@ public class LoanApplication {
 	String GuaranteeCover;
 	int MarketValueofGuaranteeCover;
 	String Status;
-	Date DateOfInterview;
+	Timestamp DateOfInterview;
 	public int getApplication_Id() {
 		return Application_Id;
 	}
 	public void setApplication_Id(int application_Id) {
 		Application_Id = application_Id;
 	}
-	public Date getApplication_date() {
+	
+	public Timestamp getApplication_date() {
 		return application_date;
 	}
-	public void setApplication_date(Date application_date) {
+	public void setApplication_date(Timestamp application_date) {
 		this.application_date = application_date;
 	}
 	public String getLoan_program() {
@@ -76,17 +78,18 @@ public class LoanApplication {
 	public void setStatus(String status) {
 		Status = status;
 	}
-	public Date getDateOfInterview() {
+	
+	public Timestamp getDateOfInterview() {
 		return DateOfInterview;
 	}
-	public void setDateOfInterview(Date dateOfInterview) {
+	public void setDateOfInterview(Timestamp dateOfInterview) {
 		DateOfInterview = dateOfInterview;
 	}
-	public LoanApplication(int application_Id, Date application_date,
+	public LoanApplication(int application_Id, Timestamp application_date,
 			String loan_program, int amountofLoan, String addressofProperty,
 			int annualFamilyIncome, String documentProofsAvailable,
 			String guaranteeCover, int marketValueofGuaranteeCover,
-			String status, Date dateOfInterview) {
+			String status, Timestamp dateOfInterview) {
 		super();
 		Application_Id = application_Id;
 		this.application_date = application_date;

@@ -29,35 +29,41 @@ public class AdminUi {
 			}
 			if(value == 1)
 			{
-				System.out.println("Welcome Admin");
-				System.out.println("Select Operation to be performed:");
-				System.out.println("1)View all loan Programs \n"
-						+ "2)Add a new loan Program \n"
-						+ "3)Delete an existing loan Program \n"
-						+ "4)Update an existing loan Program \n"
-						+ "5)View all acccepted loans \n"
-						+ "6)View all rejected loans \n"
-						+ "7)View all approved loans ");
-				System.out.println("Enter your choice:");
-				int c=sc.nextInt();
-				switch(c)
+				System.out.println("+++++++++Welcome Admin+++++++++++");
+				while(true)
 				{
-					case 1:displayAllLoans();
-						break;
-					case 2:insertLoan();
-						break;
-					case 3:deleteLoan();
-						break;
-					case 4:updateLoan();
-						break;
-					case 5:
-						break;
-					case 6:
-						break;
-					case 7:
-						break;
-					default:
-							System.out.println("Wrong Choice");
+					
+					System.out.println("Select Operation to be performed:");
+					System.out.println("1)View all loan Programs \n"
+							+ "2)Add a new loan Program \n"
+							+ "3)Delete an existing loan Program \n"
+							+ "4)Update an existing loan Program \n"
+							+ "5)View all acccepted loans \n"
+							+ "6)View all rejected loans \n"
+							+ "7)View all approved loans \n"
+							+ "8)Exit ");
+					System.out.println("Enter your choice:");
+					int c=sc.nextInt();
+					switch(c)
+					{
+						case 1:displayAllLoans();
+							break;
+						case 2:insertLoan();
+							break;
+						case 3:deleteLoan();
+							break;
+						case 4:updateLoan();
+							break;
+						case 5:
+							break;
+						case 6:
+							break;
+						case 7:
+							break;
+						case 8: System.exit(0);
+						default:
+								System.out.println("Wrong Choice");
+					}
 				}
 			}
 		} catch (LoanException e)
