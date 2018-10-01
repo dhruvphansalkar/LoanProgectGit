@@ -32,16 +32,16 @@ public class LoanManagementServiceImpl implements LoanManagementService
 	}
 
 	@Override
-	public int deleteLoanProgram(String programName) {
+	public int deleteLoanProgram(String programName)throws LoanException {
 		// TODO Auto-generated method stub
-		return 0;
+		return ldao.deleteLoanProgram(programName);
 	}
 
 	@Override
 	public int updateLoanProgram(LoanProgramsOffered loanPrograms)
 			throws LoanException {
 		// TODO Auto-generated method stub
-		return 0;
+		return ldao.updateLoanProgram(loanPrograms);
 	}
 
 	@Override

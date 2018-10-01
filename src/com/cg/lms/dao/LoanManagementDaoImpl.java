@@ -27,11 +27,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	int data=0;
 
 	@Override
-<<<<<<< HEAD
-	public int login(String username, String Password)throws LoanException
-=======
-	public int login(String username, String Password) //Tested and working
->>>>>>> d156ff251039a1d270323c49907a3ff6bfee0068
+	public int login(String username, String Password)throws LoanException //Tested and working
 	{
 		try {
 			con=DBUtil.getConn();
@@ -54,7 +50,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	}
 
 	@Override
-<<<<<<< HEAD
+
 	public int addLoanProgram(LoanProgramsOffered loanPrograms)
 			throws LoanException {
 		String insertQry="insert into LoanProgramsOffered values (?,?,?,?,?,?,?,?)";
@@ -77,11 +73,6 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			throw new LoanException(e.getMessage());
 		}
 		return data;
-=======
-	public int addLoanProgram(LoanProgramsOffered loanPrograms) throws LoanException {
-		// TODO Auto-generated method stub
-		return 0;
->>>>>>> d156ff251039a1d270323c49907a3ff6bfee0068
 	}
 
 	@Override
@@ -113,9 +104,9 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			pst.setString(1,loanPrograms.getDescription());
 			pst.setString(2,loanPrograms.getType());
 			pst.setInt(3,loanPrograms.getDurationinyears());
-			pst.setInt(4,loanPrograms.getMinloanamount());
-			pst.setInt(5,loanPrograms.getMaxloanamount());
-			pst.setInt(6,loanPrograms.getRateofinterest());
+			pst.setDouble(4,loanPrograms.getMinloanamount());
+			pst.setDouble(5,loanPrograms.getMaxloanamount());
+			pst.setDouble(6,loanPrograms.getRateofinterest());
 			pst.setString(7,loanPrograms.getProofs_required());
 			pst.setString(8,loanPrograms.getProgramName());
 			

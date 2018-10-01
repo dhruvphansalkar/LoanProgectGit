@@ -18,7 +18,7 @@ public interface LoanManagementService {
 	
 	//These are the methods accessible to the admin
 	public int addLoanProgram(LoanProgramsOffered loanPrograms) throws LoanException;
-	public int deleteLoanProgram(String programName);
+	public int deleteLoanProgram(String programName)throws LoanException;
 	public int updateLoanProgram(LoanProgramsOffered loanPrograms) throws LoanException;
 	public ArrayList<LoanApplication> viewAcceptedLoans() throws LoanException;
 	public ArrayList<LoanApplication> viewRejectedLoans() throws LoanException;
