@@ -5,17 +5,17 @@ package com.cg.lms.bean;
 import java.util.Date; //sql option is also present
 
 public class LoanApplication {
-	int Application_Id;
-	Date application_date;
-	String Loan_program;
-	int AmountofLoan;
-	String AddressofProperty;
-	int AnnualFamilyIncome;
-	String DocumentProofsAvailable;
-	String GuaranteeCover;
-	int MarketValueofGuaranteeCover;
-	String Status;
-	Date DateOfInterview;
+	int Application_Id;         	//sequence_app_id  SEQUENCE.NEXTvAL
+	Date application_date;      	//rEMOVE    
+	String Loan_program;			//program name in loan programs offered class from table
+	int AmountofLoan;				//user
+	String AddressofProperty;  	 	//user
+	int AnnualFamilyIncome;     	//user
+	String DocumentProofsAvailable;     //user
+	String GuaranteeCover;				//user
+	int MarketValueofGuaranteeCover;	//user
+	String Status;					//REMOVE	
+	Date DateOfInterview;			//REMOVE				
 	public int getApplication_Id() {
 		return Application_Id;
 	}

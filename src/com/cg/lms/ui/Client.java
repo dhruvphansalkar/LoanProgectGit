@@ -26,7 +26,8 @@ public class Client {
 			choice=sc.nextInt();
 			switch(choice)
 			{
-			case 1: 
+			case 1:
+				
 				break;
 			case 2:
 				AdminUi adui = new AdminUi();
