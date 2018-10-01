@@ -5,9 +5,9 @@ public class LoanProgramsOffered {
 	String description; 
 	String type;
 	int durationinyears;
-	int minloanamount;
-	int maxloanamount;
-	int rateofinterest;
+	double minloanamount;
+	double maxloanamount;
+	double rateofinterest;
 	String proofs_required;
 	public String getProgramName() {
 		return ProgramName;
@@ -33,22 +33,22 @@ public class LoanProgramsOffered {
 	public void setDurationinyears(int durationinyears) {
 		this.durationinyears = durationinyears;
 	}
-	public int getMinloanamount() {
+	public double getMinloanamount() {
 		return minloanamount;
 	}
-	public void setMinloanamount(int minloanamount) {
+	public void setMinloanamount(double minloanamount) {
 		this.minloanamount = minloanamount;
 	}
-	public int getMaxloanamount() {
+	public double getMaxloanamount() {
 		return maxloanamount;
 	}
-	public void setMaxloanamount(int maxloanamount) {
+	public void setMaxloanamount(double maxloanamount) {
 		this.maxloanamount = maxloanamount;
 	}
-	public int getRateofinterest() {
+	public double getRateofinterest() {
 		return rateofinterest;
 	}
-	public void setRateofinterest(int rateofinterest) {
+	public void setRateofinterest(double rateofinterest) {
 		this.rateofinterest = rateofinterest;
 	}
 	public String getProofs_required() {
@@ -58,8 +58,8 @@ public class LoanProgramsOffered {
 		this.proofs_required = proofs_required;
 	}
 	public LoanProgramsOffered(String programName, String description,
-			String type, int durationinyears, int minloanamount,
-			int maxloanamount, int rateofinterest, String proofs_required) {
+			String type, int durationinyears, double minloanamount,
+			double maxloanamount, double rateofinterest, String proofs_required) {
 		super();
 		ProgramName = programName;
 		this.description = description;
@@ -70,10 +70,6 @@ public class LoanProgramsOffered {
 		this.rateofinterest = rateofinterest;
 		this.proofs_required = proofs_required;
 	}
-	public LoanProgramsOffered() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 	@Override
 	public String toString() {
 		return "LoanProgramsOffered [ProgramName=" + ProgramName
@@ -82,6 +78,10 @@ public class LoanProgramsOffered {
 				+ minloanamount + ", maxloanamount=" + maxloanamount
 				+ ", rateofinterest=" + rateofinterest + ", proofs_required="
 				+ proofs_required + "]";
+	}
+	public LoanProgramsOffered() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	

@@ -26,9 +26,9 @@ public class LoanManagementServiceImpl implements LoanManagementService
 
 	@Override
 	public int addLoanProgram(LoanProgramsOffered loanPrograms)
-			throws LoanException {
-		// TODO Auto-generated method stub
-		return 0;
+			throws LoanException
+	{
+		return ldao.addLoanProgram(loanPrograms);
 	}
 
 	@Override

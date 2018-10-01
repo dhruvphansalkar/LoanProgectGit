@@ -27,7 +27,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	int data=0;
 
 	@Override
-	public int login(String username, String Password)
+	public int login(String username, String Password)throws LoanException
 	{
 		try {
 			con=DBUtil.getConn();
@@ -43,6 +43,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		catch (Exception e) 
 		{
 			e.printStackTrace();
+			throw new LoanException(e.getMessage());
 		}
 		
 		return -1;
@@ -51,8 +52,26 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	@Override
 	public int addLoanProgram(LoanProgramsOffered loanPrograms)
 			throws LoanException {
-		// TODO Auto-generated method stub
-		return 0;
+		String insertQry="insert into LoanProgramsOffered values (?,?,?,?,?,?,?,?)";
+		try {
+			pst=con.prepareStatement(insertQry);
+			pst.setString(1, loanPrograms.getProgramName());
+			pst.setString(2, loanPrograms.getDescription());
+			pst.setString(3, loanPrograms.getType());
+			pst.setInt(4, loanPrograms.getDurationinyears());
+			pst.setDouble(5, loanPrograms.getMinloanamount() );
+			pst.setDouble(6, loanPrograms.getMaxloanamount());
+			pst.setDouble(7, loanPrograms.getRateofinterest());
+			pst.setString(8, loanPrograms.getProofs_required());
+			data = pst.executeUpdate();
+		} 
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new LoanException(e.getMessage());
+		}
+		return data;
 	}
 
 	@Override

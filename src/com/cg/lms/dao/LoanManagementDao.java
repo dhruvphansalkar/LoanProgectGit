@@ -12,7 +12,7 @@ import com.cg.lms.exception.LoanException;
 public interface LoanManagementDao 
 {
 	//These are the methods accessible to the admin and lad
-		public int login(String username, String password);
+		public int login(String username, String password)throws LoanException;
 		
 		//These are the methods accessible to the admin
 		public int addLoanProgram(LoanProgramsOffered loanPrograms) throws LoanException;
