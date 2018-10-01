@@ -27,7 +27,11 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	int data=0;
 
 	@Override
+<<<<<<< HEAD
 	public int login(String username, String Password)throws LoanException
+=======
+	public int login(String username, String Password) //Tested and working
+>>>>>>> d156ff251039a1d270323c49907a3ff6bfee0068
 	{
 		try {
 			con=DBUtil.getConn();
@@ -50,6 +54,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	}
 
 	@Override
+<<<<<<< HEAD
 	public int addLoanProgram(LoanProgramsOffered loanPrograms)
 			throws LoanException {
 		String insertQry="insert into LoanProgramsOffered values (?,?,?,?,?,?,?,?)";
@@ -72,19 +77,55 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			throw new LoanException(e.getMessage());
 		}
 		return data;
+=======
+	public int addLoanProgram(LoanProgramsOffered loanPrograms) throws LoanException {
+		// TODO Auto-generated method stub
+		return 0;
+>>>>>>> d156ff251039a1d270323c49907a3ff6bfee0068
 	}
 
 	@Override
 	public int deleteLoanProgram(String programName) throws LoanException {
-		// TODO Auto-generated method stub
-		return 0;
+		int returnval=0;
+		try 
+		{			
+			con=DBUtil.getConn();
+			String selectQry="delete from LoanProgramsOffered where ProgramName=?";
+			pst=con.prepareStatement(selectQry);
+			pst.setString(1,programName);
+			returnval=pst.executeUpdate();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return returnval;
 	}
 
 	@Override
-	public int updateLoanProgram(LoanProgramsOffered loanPrograms)
-			throws LoanException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateLoanProgram(LoanProgramsOffered loanPrograms) throws LoanException {
+		int returnval=0;
+		try 
+		{			
+			con=DBUtil.getConn();
+			String selectQry="update LoanProgramsOffered set description=?,type=?,durationinyears=?,minloanamount=?,maxloanamount=?,rateofinterest=?,proofs_required=? where ProgramName=?";
+			pst=con.prepareStatement(selectQry);
+			pst.setString(1,loanPrograms.getDescription());
+			pst.setString(2,loanPrograms.getType());
+			pst.setInt(3,loanPrograms.getDurationinyears());
+			pst.setInt(4,loanPrograms.getMinloanamount());
+			pst.setInt(5,loanPrograms.getMaxloanamount());
+			pst.setInt(6,loanPrograms.getRateofinterest());
+			pst.setString(7,loanPrograms.getProofs_required());
+			pst.setString(8,loanPrograms.getProgramName());
+			
+			returnval=pst.executeUpdate();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return returnval;
 	}
 
 	@Override
@@ -113,43 +154,37 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	}
 
 	@Override
-	public int updateApplicationStatus(int appId, String newStatus,
-			Timestamp date) throws LoanException {
+	public int updateApplicationStatus(int appId, String newStatus,Timestamp date) throws LoanException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int setStatusAfterInterview(int appId, String newStatus)
-			throws LoanException {
+	public int setStatusAfterInterview(int appId, String newStatus) throws LoanException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int addCustomerDetails(CustomerDetails custDetails,
-			LoanApplication loanApp) throws LoanException {
+	public int addCustomerDetails(CustomerDetails custDetails, LoanApplication loanApp) throws LoanException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public LoanApplication viewApplicationStatusById(int id)
-			throws LoanException {
+	public LoanApplication viewApplicationStatusById(int id) throws LoanException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<LoanProgramsOffered> viewLoanProgramOffered()
-			throws LoanException {
+	public ArrayList<LoanProgramsOffered> viewLoanProgramOffered() throws LoanException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public LoanProgramsOffered getLoanProgramByName(String loanName)
-			throws LoanException {
+	public LoanProgramsOffered getLoanProgramByName(String loanName) throws LoanException {
 		// TODO Auto-generated method stub
 		return null;
 	}
