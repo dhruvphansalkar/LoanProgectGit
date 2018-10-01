@@ -11,6 +11,9 @@ public class LadUi
 	Scanner sc = new Scanner(System.in);
 	public void ladUiMethod()
 	{
+		System.out.println("********LAD Login Page*********");
+		System.out.println();
+		System.out.println();
 		System.out.println("Enter your login id:");
 		String uname=sc.next();
 		System.out.println("Enter your password:");

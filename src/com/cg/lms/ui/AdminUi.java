@@ -14,6 +14,9 @@ public class AdminUi {
 	public void adminUiMethod()
 	{
 		lService= new LoanManagementServiceImpl();
+		System.out.println("********Admin Login Page*********");
+		System.out.println();
+		System.out.println();
 		System.out.println("Enter your login id:");
 		String username=sc.next();
 		System.out.println("Enter your password:");
