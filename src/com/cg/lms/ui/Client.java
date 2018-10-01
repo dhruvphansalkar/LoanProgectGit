@@ -1,11 +1,13 @@
 package com.cg.lms.ui;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.cg.lms.bean.LoanProgramsOffered;
 import com.cg.lms.exception.LoanException;
 import com.cg.lms.service.LoanManagementService;
 import com.cg.lms.service.LoanManagementServiceImpl;
+
 
 public class Client {
 	static LoanManagementService lService=null;
@@ -53,7 +55,7 @@ public class Client {
 						int c=sc.nextInt();
 						switch(c)
 						{
-							case 1:
+							case 1:displayAllLoans();
 								break;
 							case 2:
 								insertLoan();
@@ -105,6 +107,22 @@ public class Client {
 			}
 		}
 		
+	}
+	private static void displayAllLoans() 
+	{
+		ArrayList<LoanProgramsOffered> loanList;
+		// TODO Auto-generated method stub
+		try {
+			loanList=lService.viewLoanProgramOffered();
+			System.out.println("\tProgramName \tdescription \ttype \tdurationinyears \tminloanamount \tmaxloanamount \trateofinterest \tproofs_required");
+			for(LoanProgramsOffered l:loanList)
+			{
+				System.out.println("\t"+l.getProgramName()+"\t"+l.getDescription()+"\t"+l.getType()+"\t"+l.getDurationinyears()+"\t"+l.getMinloanamount()+"\t"+l.getMaxloanamount()+"\t"+l.getRateofinterest()+"\t"+l.getProofs_required());
+			}
+		} catch (LoanException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	private static void insertLoan()
 	{

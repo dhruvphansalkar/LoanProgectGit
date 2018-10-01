@@ -169,9 +169,47 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	}
 
 	@Override
-	public ArrayList<LoanProgramsOffered> viewLoanProgramOffered() throws LoanException {
+	public ArrayList<LoanProgramsOffered> viewLoanProgramOffered() throws LoanException 
+	{
+		ArrayList<LoanProgramsOffered> loanList=null;
+		try
+		{
+			loanList=new ArrayList<LoanProgramsOffered>();
+			con=DBUtil.getConn();
+			String selectQry="select * from LoanProgramsOffered";
+			st=con.createStatement();
+			rs=st.executeQuery(selectQry);
+			
+			while(rs.next())
+			{
+				//dao.info(new Employee(rs.getInt("emp_id"),rs.getString("emp_name"),rs.getFloat("emp_sal")));
+				loanList.add(new LoanProgramsOffered(rs.getString("ProgramName"),rs.getString("description"),rs.getString("type"),rs.getInt("durationinyears"),rs.getDouble("minloanamount"),rs.getDouble("maxloanamount"),rs.getDouble("rateofinterest"),rs.getString("proofs_required")));
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			throw new LoanException(e.getMessage());
+		}
+		finally
+		{
+			try
+			{
+				st.close();
+				rs.close();
+				con.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+				//daoLogger.error(e.getMessage());
+				throw new LoanException(e.getMessage());
+			}
+		}
+		//daoLogger.info("All data retrieved \n"+empList);
 		// TODO Auto-generated method stub
-		return null;
+		return loanList;
+		
 	}
 
 	@Override
