@@ -27,6 +27,8 @@ public class Client {
 			switch(choice)
 			{
 			case 1: 
+				CustomerUi cui = new CustomerUi();
+				cui.cuiMethod();
 				break;
 			case 2:
 				AdminUi adui = new AdminUi();

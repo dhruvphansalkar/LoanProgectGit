@@ -47,54 +47,54 @@ public class LoanManagementServiceImpl implements LoanManagementService
 	@Override
 	public ArrayList<LoanApplication> viewAcceptedLoans() throws LoanException {
 		// TODO Auto-generated method stub
-		return null;
+		return ldao.viewAcceptedLoans();
 	}
 
 	@Override
 	public ArrayList<LoanApplication> viewRejectedLoans() throws LoanException {
 		// TODO Auto-generated method stub
-		return null;
+		return ldao.viewRejectedLoans();
 	}
 
 	@Override
 	public ArrayList<ApprovedLoans> viewApprovedLoans() throws LoanException {
 		// TODO Auto-generated method stub
-		return null;
+		return ldao.viewApprovedLoans();
 	}
 
 	@Override
 	public ArrayList<LoanApplication> viewApplicationByLoanProgram(
 			String programName) throws LoanException {
 		// TODO Auto-generated method stub
-		return null;
+		return ldao.viewApplicationByLoanProgram(programName);
 	}
 
 	@Override
 	public int updateApplicationStatus(int appId, String newStatus,
 			Timestamp date) throws LoanException {
 		// TODO Auto-generated method stub
-		return 0;
+		return ldao.updateApplicationStatus(appId, newStatus, date);
 	}
 
 	@Override
 	public int setStatusAfterInterview(int appId, String newStatus)
 			throws LoanException {
 		// TODO Auto-generated method stub
-		return 0;
+		return ldao.setStatusAfterInterview(appId, newStatus);
 	}
 
 	@Override
 	public int addCustomerDetails(CustomerDetails custDetails,
 			LoanApplication loanApp) throws LoanException {
 		// TODO Auto-generated method stub
-		return 0;
+		return ldao.addCustomerDetails(custDetails, loanApp);
 	}
 
 	@Override
 	public LoanApplication viewApplicationStatusById(int id)
 			throws LoanException {
 		// TODO Auto-generated method stub
-		return null;
+		return ldao.viewApplicationStatusById(id);
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class LoanManagementServiceImpl implements LoanManagementService
 	public LoanProgramsOffered getLoanProgramByName(String loanName)
 			throws LoanException {
 		// TODO Auto-generated method stub
-		return null;
+		return ldao.getLoanProgramByName(loanName);
 	}
 
 }

@@ -20,7 +20,7 @@ public class AdminUi {
 		String password=sc.next();
 		try {
 			int value=lService.login(username,password);
-			if(value == -1)
+			if(value == 2)
 			{
 				System.out.println("Wrong Credentials.Please try again");
 			}

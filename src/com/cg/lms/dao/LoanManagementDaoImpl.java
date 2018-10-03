@@ -31,13 +31,14 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	{
 		try {
 			con=DBUtil.getConn();
-			String selectQry="select Login_Id,Password from EndUsers where Login_id=? and Password=?";
+			String selectQry="select count(*) as COUNT from EndUsers where login_id=? and password=?";
 			pst=con.prepareStatement(selectQry);
 			pst.setString(1,username);
 			pst.setString(2,Password);
 			rs=pst.executeQuery();
 			rs.next();
-			if(rs!=null)
+			int count=Integer.parseInt(rs.getString("COUNT"));
+			if(count==1)
 				return 1;
 		} 
 		catch (Exception e) 
@@ -45,8 +46,23 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			e.printStackTrace();
 			throw new LoanException(e.getMessage());
 		}
-		
-		return -1;
+		finally
+		{
+			try
+			{
+				pst.close();
+				rs.close();
+				con.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+				//daoLogger.error(e.getMessage());
+				throw new LoanException(e.getMessage());
+			}
+		}
+	
+		return 2;
 	}
 
 	@Override
@@ -197,9 +213,30 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 
 	@Override
 	public ArrayList<LoanApplication> viewApplicationByLoanProgram(
-			String programName) throws LoanException {
-		// TODO Auto-generated method stub
-		return null;
+			String programName) throws LoanException
+			{
+		ArrayList<LoanApplication> Llist=null;
+		try {
+			con=DBUtil.getConn();
+			String selectQry="select * from LoanApplication where Loan_program=?";
+			pst=con.prepareStatement(selectQry);
+			pst.setString(1,programName);
+			rs = pst.executeQuery();
+			while(rs.next())
+			{
+				Llist.add(new LoanApplication(rs.getInt("Application_Id"),
+						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
+						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new LoanException(e.getMessage());
+		}
+		
+		return Llist;
 	}
 
 	@Override
@@ -292,8 +329,9 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	}
 
 	@Override
-	public LoanProgramsOffered getLoanProgramByName(String loanName) throws LoanException {
-		// TODO Auto-generated method stub
+	public LoanProgramsOffered getLoanProgramByName(String loanName) throws LoanException
+	{
+		
 		return null;
 	}
 
