@@ -2,6 +2,7 @@ package com.cg.lms.dao;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,8 +24,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	Connection con=null;
 	Statement st=null;
 	PreparedStatement pst=null;
+	PreparedStatement pst2=null;
 	ResultSet rs=null;
 	int data=0;
+	int data2=0;
 
 	@Override
 	public int login(String username, String Password)throws LoanException //Tested and working
@@ -215,30 +218,50 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	}
 
 	@Override
-	public int addCustomerDetails(CustomerDetails custDetails, LoanApplication loanApp) throws LoanException 
+	public int addCustomerDetails(LoanApplication loanApp, CustomerDetails custDetails) throws LoanException 
 	{
 		try 
 		{
+			 long millis=System.currentTimeMillis();  
+			 java.sql.Date date=new java.sql.Date(millis); 
+			con=DBUtil.getConn();
+			String insertQry2="insert into LoanApplication(Application_Id,Loan_Program,AddressOfProperty,"
+					+ "AnnualFamilyIncome,DocumentProofsAvailable,GuaranteeCover,MarketValueOfGuaranteeCover,"
+					+ "AmountofLoan,Application_Date) values(sequence_app_id.nextval,?,?,?,?,?,?,?,?)";
+			pst2=con.prepareStatement(insertQry2);
+			String a = loanApp.getLoan_program();
+			System.out.println(a);
+			System.out.println(loanApp);
+			pst2.setString(1, a);
+			pst2.setString(2, loanApp.getAddressofProperty());
+			pst2.setInt(3, loanApp.getAnnualFamilyIncome());
+			pst2.setString(4, loanApp.getDocumentProofsAvailable());
+			pst2.setString(5, loanApp.getGuaranteeCover());
+			pst2.setInt(6, loanApp.getMarketValueofGuaranteeCover());
+			pst2.setInt(7, loanApp.getAmountofLoan());
+			pst2.setDate(8, date);
 			
-			String insertQry1="insert into CustomerDetails values (?,?,?,?,?,?,?,?)";
+			data2 = pst2.executeUpdate();
+			
+			
+			
+			String insertQry1="insert into CustomerDetails values (sequence_app_id.currval,?,?,?,?,?,?,?)";
 			pst=con.prepareStatement(insertQry1);
-			pst.setInt(1, custDetails.getApplication_Id());
-			pst.setString(2, custDetails.getApplicant_name());
-			pst.setTimestamp(3, custDetails.getDate_of_birth());
-			pst.setString(4, custDetails.getMarital_status());
-			pst.setInt(5, custDetails.getPhone_number());
-			pst.setInt(6, custDetails.getMobile_number());
-			pst.setInt(7,custDetails.getCountofDependents());
-			pst.setString(8, custDetails.getEmail_id());
+			pst.setString(1, custDetails.getApplicant_name());
+			pst.setDate(2, custDetails.getDate_of_birth());
+			pst.setString(3, custDetails.getMarital_status());
+			pst.setInt(4, custDetails.getPhone_number());
+			pst.setInt(5, custDetails.getMobile_number());
+			pst.setInt(6,custDetails.getCountofDependents());
+			pst.setString(7, custDetails.getEmail_id());
 			data = pst.executeUpdate();
 			
-			String insertQry2="insert into LoanApllication() values (?,?,?,?,?,?,?,?)";
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		return 0;
+		return data;
 	}
 
 	@Override

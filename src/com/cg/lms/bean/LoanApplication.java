@@ -21,13 +21,13 @@ public class LoanApplication {
 	int MarketValueofGuaranteeCover;
 	String Status;
 	Timestamp DateOfInterview;
+
 	public int getApplication_Id() {
 		return Application_Id;
 	}
 	public void setApplication_Id(int application_Id) {
 		Application_Id = application_Id;
 	}
-	
 	public Timestamp getApplication_date() {
 		return application_date;
 	}
@@ -82,7 +82,6 @@ public class LoanApplication {
 	public void setStatus(String status) {
 		Status = status;
 	}
-	
 	public Timestamp getDateOfInterview() {
 		return DateOfInterview;
 	}

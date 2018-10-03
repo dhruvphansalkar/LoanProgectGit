@@ -28,7 +28,7 @@ public interface LoanManagementDao
 		public int setStatusAfterInterview(int appId, String newStatus) throws LoanException;
 		
 		//These methods are for the customer
-		public int addCustomerDetails(CustomerDetails custDetails, LoanApplication loanApp) throws LoanException;
+		public int addCustomerDetails(LoanApplication loanApp, CustomerDetails custDetails) throws LoanException;
 		public LoanApplication viewApplicationStatusById(int id) throws LoanException;
 		
 		//methods for everyone

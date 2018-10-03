@@ -84,10 +84,9 @@ public class LoanManagementServiceImpl implements LoanManagementService
 	}
 
 	@Override
-	public int addCustomerDetails(CustomerDetails custDetails,
-			LoanApplication loanApp) throws LoanException {
+	public int addCustomerDetails(LoanApplication loanApp, CustomerDetails custDetails) throws LoanException {
 		// TODO Auto-generated method stub
-		return 0;
+		return ldao.addCustomerDetails(loanApp, custDetails);
 	}
 
 	@Override
