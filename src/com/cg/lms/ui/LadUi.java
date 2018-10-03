@@ -47,13 +47,13 @@ public class LadUi
 					do{
 					switch(c)
 						{
-							case 1:viewApplicationByLoanProgram();
+							case 1:viewAllLoanProgramsUi();
 								break;
-							case 2:updateApplicationStatus();
+							case 2:updateApplicationStatusAndDateUi();
 								break;
-							case 3:setStatusAfterInterview();
+							case 3:changeStatusAfterInterviewUi();
 								break;
-							case 4:viewLoanProgramOffered();
+							case 4:viewApplicationByLoanProgramUi();
 								break;
 							case 5:
 								System.exit(0);
@@ -78,6 +78,30 @@ public class LadUi
 			{
 				e.printStackTrace();
 			}
+		
+	}
+
+	private void viewApplicationByLoanProgramUi() 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void changeStatusAfterInterviewUi() 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void updateApplicationStatusAndDateUi() 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void viewAllLoanProgramsUi() 
+	{
+		// TODO Auto-generated method stub
 		
 	}
 }

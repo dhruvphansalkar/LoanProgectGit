@@ -51,9 +51,12 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		
 		return -1;
 	}
+	
+	
+	
+	
 
 	@Override
-
 	public int addLoanProgram(LoanProgramsOffered loanPrograms)
 			throws LoanException {
 		String insertQry="insert into LoanProgramsOffered values (?,?,?,?,?,?,?,?)";
@@ -77,6 +80,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		}
 		return data;
 	}
+	
+	
+	
+	
 
 	@Override
 	public int deleteLoanProgram(String programName) throws LoanException {
@@ -95,6 +102,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		}
 		return returnval;
 	}
+	
+	
+	
+	
 
 	@Override
 	public int updateLoanProgram(LoanProgramsOffered loanPrograms) throws LoanException {
@@ -121,6 +132,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		}
 		return returnval;
 	}
+	
+	
+	
+	
 
 	@Override
 	public ArrayList<LoanApplication> viewAcceptedLoans() throws LoanException {
@@ -146,6 +161,11 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		
 		return Llist;
 	}
+	
+	
+	
+	
+	
 
 	@Override
 	public ArrayList<LoanApplication> viewRejectedLoans() throws LoanException {
@@ -171,6 +191,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		
 		return Llist;
 	}
+	
+	
+	
+	
 
 	@Override
 	public ArrayList<ApprovedLoans> viewApprovedLoans() throws LoanException
@@ -197,6 +221,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		
 		return Llist;
 	}
+	
+	
+	
+	
 
 	@Override
 	public ArrayList<LoanApplication> viewApplicationByLoanProgram(
@@ -204,18 +232,56 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+	
+	
+	
 
 	@Override
 	public int updateApplicationStatus(int appId, String newStatus,Date date) throws LoanException {
-		// TODO Auto-generated method stub
-		return 0;
+		try
+		{
+			con=DBUtil.getConn();
+			String updateQry="update LoanApplication set status = ?, DateOfInterview = ? where Application_Id = ?";
+			pst=con.prepareStatement(updateQry);
+			pst.setString(1, newStatus);
+			pst.setDate(2, date);
+			pst.setInt(3, appId);
+			data = pst.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return data;
 	}
 
+	
+	
+	
 	@Override
 	public int setStatusAfterInterview(int appId, String newStatus) throws LoanException {
-		// TODO Auto-generated method stub
-		return 0;
+		try
+		{
+			con=DBUtil.getConn();
+			String updateQry="update LoanApplication set status = ? where Application_Id = ?";
+			pst=con.prepareStatement(updateQry);
+			pst.setString(1, newStatus);
+			pst.setInt(2, appId);
+			data = pst.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return data;
+		
 	}
+	
+	
+	
+	
 
 	@Override
 	public int addCustomerDetails(LoanApplication loanApp, CustomerDetails custDetails) throws LoanException 
@@ -261,6 +327,9 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		}
 		return data;
 	}
+	
+	
+	
 
 	@Override
 	public LoanApplication viewApplicationStatusById(int id) throws LoanException
@@ -288,6 +357,9 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		
 		return obj;
 	}
+	
+	
+	
 
 	@Override
 	public ArrayList<LoanProgramsOffered> viewLoanProgramOffered() throws LoanException 
@@ -328,15 +400,32 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			}
 		}
 		//daoLogger.info("All data retrieved \n"+empList);
-		// TODO Auto-generated method stub
 		return loanList;
 		
 	}
+	
+	
+	
+	
 
 	@Override
 	public LoanProgramsOffered getLoanProgramByName(String loanName) throws LoanException {
-		// TODO Auto-generated method stub
-		return null;
+		LoanProgramsOffered lpo = null;
+		try
+		{
+			con=DBUtil.getConn();
+			String updateQry="select * from LoanProgramsOffered where ProgramName=?";
+			pst=con.prepareStatement(updateQry);
+			pst.setString(1, loanName);
+			rs = pst.executeQuery();
+			lpo= (LoanProgramsOffered)rs.getObject(1);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return lpo;
+		
 	}
 
 }
