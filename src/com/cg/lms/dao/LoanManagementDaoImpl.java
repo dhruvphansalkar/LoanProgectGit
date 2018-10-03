@@ -77,6 +77,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			throws LoanException {
 		String insertQry="insert into LoanProgramsOffered values (?,?,?,?,?,?,?,?)";
 		try {
+			con=DBUtil.getConn();
 			pst=con.prepareStatement(insertQry);
 			pst.setString(1, loanPrograms.getProgramName());
 			pst.setString(2, loanPrograms.getDescription());
@@ -164,10 +165,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			while(rs.next())
 			{
 				Llist.add(new LoanApplication(rs.getInt("Application_Id"),
-						rs.getTimestamp("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
 						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
 						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
-						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getTimestamp("DateOfInterview")));
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -194,10 +195,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			while(rs.next())
 			{
 				Llist.add(new LoanApplication(rs.getInt("Application_Id"),
-						rs.getTimestamp("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
 						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
 						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
-						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getTimestamp("DateOfInterview")));
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -246,7 +247,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	public ArrayList<LoanApplication> viewApplicationByLoanProgram(
 			String programName) throws LoanException
 			{
-		ArrayList<LoanApplication> Llist=null;
+		ArrayList<LoanApplication> Llist=new ArrayList<LoanApplication>();
 		try {
 			con=DBUtil.getConn();
 			String selectQry="select * from LoanApplication where Loan_program=?";
@@ -381,10 +382,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			while(rs.next())
 			{
 				obj=new LoanApplication(rs.getInt("Application_Id"),
-						rs.getTimestamp("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
 						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
 						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
-						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getTimestamp("DateOfInterview"));
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -446,12 +447,6 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	
 
 	@Override
-<<<<<<< HEAD
-	public LoanProgramsOffered getLoanProgramByName(String loanName) throws LoanException
-	{
-		
-		return null;
-=======
 	public LoanProgramsOffered getLoanProgramByName(String loanName) throws LoanException {
 		LoanProgramsOffered lpo = null;
 		try
@@ -468,8 +463,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			e.printStackTrace();
 		}
 		return lpo;
-		
->>>>>>> 3cb2d6012fc4ae0e9c8bfd5956358940913584a0
+
 	}
 
 }

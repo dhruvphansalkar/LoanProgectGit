@@ -167,8 +167,10 @@ public class AdminUi {
 				System.out.println("Sorry,data not inserted");
 			if(dataInserted==1)
 				System.out.println("data inserted");
-		} catch (LoanException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (LoanException e) 
+		{
+			
 			e.printStackTrace();
 		}
 		

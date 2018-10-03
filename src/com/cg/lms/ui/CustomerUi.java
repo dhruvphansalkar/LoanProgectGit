@@ -1,10 +1,8 @@
 package com.cg.lms.ui;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Scanner;
-
-=======
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -14,7 +12,6 @@ import java.util.Scanner;
 import oracle.sql.DATE;
 
 import com.cg.lms.bean.CustomerDetails;
->>>>>>> 3cb2d6012fc4ae0e9c8bfd5956358940913584a0
 import com.cg.lms.bean.LoanApplication;
 import com.cg.lms.bean.LoanProgramsOffered;
 import com.cg.lms.exception.LoanException;
@@ -23,37 +20,47 @@ import com.cg.lms.service.LoanManagementServiceImpl;
 
 public class CustomerUi 
 {
-<<<<<<< HEAD
+
 	LoanManagementService lService=null;
 	Scanner sc = new Scanner(System.in);
+	LoanApplication loanApp = null;
+	CustomerDetails cd = null;
+	
 	public void cuiMethod()
 	{
 		lService= new LoanManagementServiceImpl();
 		System.out.println("+++++++++Welcome Customer Namaskar +++++++++++");
-		while(true)
+		int c=0;
+		System.out.println("Select Operation to be performed:");
+		System.out.println("1)View all loan Programs \n"
+				+ "2)View Application status by ID \n"
+				+ "3)Apply for Loan \n"
+				+ "4)Exit ");
+		System.out.println("Enter your choice:");
+		c=sc.nextInt();
+		do
 		{
-			
-			System.out.println("Select Operation to be performed:");
-			System.out.println("1)View all loan Programs \n"
-					+ "2)View Application status by ID \n"
-					+ "3)Exit ");
-			System.out.println("Enter your choice:");
-			int c=sc.nextInt();
 			switch(c)
 			{
 				case 1:displayAllLoans();
 					break;
 				case 2:viewAppStatusByID();
 					break;
-			/*	case 3:deleteLoan();
+				case 3:addLoan();
 					break;
-				case 4:updateLoan();
+				/*case 4:updateLoan();
 					break;*/
-				case 3: System.exit(0);
-				default:
-						System.out.println("Wrong Choice");
+				case 4: System.exit(0);
+				default:System.out.println("Wrong Choice");
 			}
-		}
+			System.out.println("Select Operation to be performed:");
+			System.out.println("1)View all loan Programs \n"
+					+ "2)View Application status by ID \n"
+					+ "3)Apply for Loan"
+					+ "4)Exit ");
+			System.out.println("Enter your choice:");
+			c=sc.nextInt();
+		}while(c!=4);
 	}
 	private void viewAppStatusByID()
 	{
@@ -68,76 +75,38 @@ public class CustomerUi
 			e.printStackTrace();
 		}
 	}
-=======
-	Scanner sc=new Scanner(System.in);
-	LoanManagementService lService=null;
-	LoanApplication loanApp = null;
-	CustomerDetails cd = null;
-	public void customerUiMethod()
-	{
-		
-		System.out.println("**********Welcome Customer**********");
-		System.out.println("Select Operation to be performed:");
-		System.out.println("1)View all loan Programs \n"
-				+ "2)Apply for a loan Program \n"
-				+ "3)Exit");
-				
-		System.out.println("Enter your choice:");
-		int c=sc.nextInt();
-		do{///////////////////////
-		switch(c)
-			{
-				case 1:displayAllLoans();
-					break;
-				case 2:addLoan();
-					break;
-				case 3:
-					System.exit(0);
-				default:
-					System.out.println("Wrong Choice");
-			}
-		System.out.println("********Welcome Customer********");
-		System.out.println("Select Operation to be performed:");
-		System.out.println("1)View all loan Programs \n"
-				+ "2)Apply for a loan Program \n"
-				+ "3)Exit");
-				
-		System.out.println("Enter your choice:");
-		c=sc.nextInt();
-		}while(c!=8);
-	}
-	
->>>>>>> 3cb2d6012fc4ae0e9c8bfd5956358940913584a0
+
+
 	private void displayAllLoans() 
 	{
 		
 		ArrayList<LoanProgramsOffered> loanList;
 		// TODO Auto-generated method stub
 		try {
-<<<<<<< HEAD
-=======
+
+
 			lService = new LoanManagementServiceImpl();
->>>>>>> 3cb2d6012fc4ae0e9c8bfd5956358940913584a0
+
 			loanList=lService.viewLoanProgramOffered();
 			System.out.println("\tProgramName \tdescription \ttype \tdurationinyears \tminloanamount \tmaxloanamount \trateofinterest \tproofs_required");
 			for(LoanProgramsOffered l:loanList)
 			{
 				System.out.println("\t"+l.getProgramName()+"\t"+l.getDescription()+"\t"+l.getType()+"\t"+l.getDurationinyears()+"\t"+l.getMinloanamount()+"\t"+l.getMaxloanamount()+"\t"+l.getRateofinterest()+"\t"+l.getProofs_required());
 			}
-		} catch (LoanException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (LoanException e) 
+		{
 			e.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
-=======
+
 	
 	private void addLoan()
 	{
 		try
 		{
 			
-		Timestamp t =null;
+		Date t =null;
 		lService = new LoanManagementServiceImpl();
 		System.out.println("Enter the Loan Program you want to avail");
 		String prog = sc.next();
@@ -187,5 +156,4 @@ public class CustomerUi
 			e.printStackTrace();
 		}
 	}
->>>>>>> 3cb2d6012fc4ae0e9c8bfd5956358940913584a0
 }

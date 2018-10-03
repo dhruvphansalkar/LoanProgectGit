@@ -26,15 +26,11 @@ public class Client {
 			choice=sc.nextInt();
 			switch(choice)
 			{
-<<<<<<< HEAD
+
 			case 1: 
 				CustomerUi cui = new CustomerUi();
 				cui.cuiMethod();
-=======
-			case 1:
-				CustomerUi cui = new CustomerUi();
-				cui.customerUiMethod();
->>>>>>> 3cb2d6012fc4ae0e9c8bfd5956358940913584a0
+
 				break;
 			case 2:
 				AdminUi adui = new AdminUi();

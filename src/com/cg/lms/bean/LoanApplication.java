@@ -11,7 +11,7 @@ public class LoanApplication {
 				//REMOVE				
 
 	int Application_Id;
-	Timestamp application_date;
+	Date application_date;
 	String Loan_program;
 	int AmountofLoan;
 	String AddressofProperty;
@@ -20,7 +20,7 @@ public class LoanApplication {
 	String GuaranteeCover;
 	int MarketValueofGuaranteeCover;
 	String Status;
-	Timestamp DateOfInterview;
+	Date DateOfInterview;
 
 	public int getApplication_Id() {
 		return Application_Id;
@@ -28,10 +28,10 @@ public class LoanApplication {
 	public void setApplication_Id(int application_Id) {
 		Application_Id = application_Id;
 	}
-	public Timestamp getApplication_date() {
+	public Date getApplication_date() {
 		return application_date;
 	}
-	public void setApplication_date(Timestamp application_date) {
+	public void setApplication_date(Date application_date) {
 		this.application_date = application_date;
 	}
 	public String getLoan_program() {
@@ -82,17 +82,17 @@ public class LoanApplication {
 	public void setStatus(String status) {
 		Status = status;
 	}
-	public Timestamp getDateOfInterview() {
+	public Date getDateOfInterview() {
 		return DateOfInterview;
 	}
-	public void setDateOfInterview(Timestamp dateOfInterview) {
+	public void setDateOfInterview(Date dateOfInterview) {
 		DateOfInterview = dateOfInterview;
 	}
-	public LoanApplication(int application_Id, Timestamp date,
+	public LoanApplication(int application_Id, Date date,
 			String loan_program, int amountofLoan, String addressofProperty,
 			int annualFamilyIncome, String documentProofsAvailable,
 			String guaranteeCover, int marketValueofGuaranteeCover,
-			String status, Timestamp date2) {
+			String status, Date date2) {
 		super();
 		Application_Id = application_Id;
 		this.application_date = date;
