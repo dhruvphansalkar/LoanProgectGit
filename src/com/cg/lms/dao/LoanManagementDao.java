@@ -1,5 +1,6 @@
 package com.cg.lms.dao;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ public interface LoanManagementDao
 		
 		//These are the methods accessible to the lad
 		public ArrayList<LoanApplication> viewApplicationByLoanProgram(String programName) throws LoanException;
-		public int updateApplicationStatus(int appId, String newStatus, Timestamp date) throws LoanException;//change satus, add date
+		public int updateApplicationStatus(int appId, String newStatus, Date date) throws LoanException;//change satus, add date
 		public int setStatusAfterInterview(int appId, String newStatus) throws LoanException;
 		
 		//These methods are for the customer

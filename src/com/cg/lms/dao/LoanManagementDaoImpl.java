@@ -206,7 +206,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	}
 
 	@Override
-	public int updateApplicationStatus(int appId, String newStatus,Timestamp date) throws LoanException {
+	public int updateApplicationStatus(int appId, String newStatus,Date date) throws LoanException {
 		// TODO Auto-generated method stub
 		return 0;
 	}

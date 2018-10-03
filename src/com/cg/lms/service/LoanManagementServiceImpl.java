@@ -1,5 +1,6 @@
 package com.cg.lms.service;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -71,7 +72,7 @@ public class LoanManagementServiceImpl implements LoanManagementService
 
 	@Override
 	public int updateApplicationStatus(int appId, String newStatus,
-			Timestamp date) throws LoanException {
+			Date date) throws LoanException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
