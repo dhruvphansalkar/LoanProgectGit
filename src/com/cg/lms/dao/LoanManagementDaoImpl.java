@@ -2,6 +2,7 @@ package com.cg.lms.dao;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,8 +24,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	Connection con=null;
 	Statement st=null;
 	PreparedStatement pst=null;
+	PreparedStatement pst2=null;
 	ResultSet rs=null;
 	int data=0;
+	int data2=0;
 
 	@Override
 	public int login(String username, String Password)throws LoanException //Tested and working
@@ -64,9 +67,12 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	
 		return 2;
 	}
+	
+	
+	
+	
 
 	@Override
-
 	public int addLoanProgram(LoanProgramsOffered loanPrograms)
 			throws LoanException {
 		String insertQry="insert into LoanProgramsOffered values (?,?,?,?,?,?,?,?)";
@@ -90,6 +96,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		}
 		return data;
 	}
+	
+	
+	
+	
 
 	@Override
 	public int deleteLoanProgram(String programName) throws LoanException {
@@ -108,6 +118,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		}
 		return returnval;
 	}
+	
+	
+	
+	
 
 	@Override
 	public int updateLoanProgram(LoanProgramsOffered loanPrograms) throws LoanException {
@@ -134,6 +148,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		}
 		return returnval;
 	}
+	
+	
+	
+	
 
 	@Override
 	public ArrayList<LoanApplication> viewAcceptedLoans() throws LoanException {
@@ -146,10 +164,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			while(rs.next())
 			{
 				Llist.add(new LoanApplication(rs.getInt("Application_Id"),
-						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						rs.getTimestamp("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
 						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
 						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
-						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getTimestamp("DateOfInterview")));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -159,6 +177,11 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		
 		return Llist;
 	}
+	
+	
+	
+	
+	
 
 	@Override
 	public ArrayList<LoanApplication> viewRejectedLoans() throws LoanException {
@@ -171,10 +194,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			while(rs.next())
 			{
 				Llist.add(new LoanApplication(rs.getInt("Application_Id"),
-						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						rs.getTimestamp("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
 						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
 						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
-						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getTimestamp("DateOfInterview")));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -184,6 +207,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		
 		return Llist;
 	}
+	
+	
+	
+	
 
 	@Override
 	public ArrayList<ApprovedLoans> viewApprovedLoans() throws LoanException
@@ -210,6 +237,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		
 		return Llist;
 	}
+	
+	
+	
+	
 
 	@Override
 	public ArrayList<LoanApplication> viewApplicationByLoanProgram(
@@ -238,24 +269,104 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		
 		return Llist;
 	}
+	
+	
+	
+	
+	
 
 	@Override
-	public int updateApplicationStatus(int appId, String newStatus,Timestamp date) throws LoanException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateApplicationStatus(int appId, String newStatus,Date date) throws LoanException {
+		try
+		{
+			con=DBUtil.getConn();
+			String updateQry="update LoanApplication set status = ?, DateOfInterview = ? where Application_Id = ?";
+			pst=con.prepareStatement(updateQry);
+			pst.setString(1, newStatus);
+			pst.setDate(2, date);
+			pst.setInt(3, appId);
+			data = pst.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return data;
 	}
 
+	
+	
+	
 	@Override
 	public int setStatusAfterInterview(int appId, String newStatus) throws LoanException {
-		// TODO Auto-generated method stub
-		return 0;
+		try
+		{
+			con=DBUtil.getConn();
+			String updateQry="update LoanApplication set status = ? where Application_Id = ?";
+			pst=con.prepareStatement(updateQry);
+			pst.setString(1, newStatus);
+			pst.setInt(2, appId);
+			data = pst.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return data;
+		
 	}
+	
+	
+	
+	
 
 	@Override
-	public int addCustomerDetails(CustomerDetails custDetails, LoanApplication loanApp) throws LoanException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int addCustomerDetails(LoanApplication loanApp, CustomerDetails custDetails) throws LoanException 
+	{
+		try 
+		{
+			 long millis=System.currentTimeMillis();  
+			 java.sql.Date date=new java.sql.Date(millis); 
+			con=DBUtil.getConn();
+			String insertQry2="insert into LoanApplication(Application_Id,Loan_Program,AddressOfProperty,"
+					+ "AnnualFamilyIncome,DocumentProofsAvailable,GuaranteeCover,MarketValueOfGuaranteeCover,"
+					+ "AmountofLoan,Application_Date) values(sequence_app_id.nextval,?,?,?,?,?,?,?,?)";
+			pst2=con.prepareStatement(insertQry2);
+			
+			pst2.setString(1, loanApp.getLoan_program());
+			pst2.setString(2, loanApp.getAddressofProperty());
+			pst2.setInt(3, loanApp.getAnnualFamilyIncome());
+			pst2.setString(4, loanApp.getDocumentProofsAvailable());
+			pst2.setString(5, loanApp.getGuaranteeCover());
+			pst2.setInt(6, loanApp.getMarketValueofGuaranteeCover());
+			pst2.setInt(7, loanApp.getAmountofLoan());
+			pst2.setDate(8, date);
+			
+			data2 = pst2.executeUpdate();
+			
+			
+			
+			String insertQry1="insert into CustomerDetails values (sequence_app_id.currval,?,?,?,?,?,?,?)";
+			pst=con.prepareStatement(insertQry1);
+			pst.setString(1, custDetails.getApplicant_name());
+			pst.setDate(2, custDetails.getDate_of_birth());
+			pst.setString(3, custDetails.getMarital_status());
+			pst.setInt(4, custDetails.getPhone_number());
+			pst.setInt(5, custDetails.getMobile_number());
+			pst.setInt(6,custDetails.getCountofDependents());
+			pst.setString(7, custDetails.getEmail_id());
+			data = pst.executeUpdate();
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return data;
 	}
+	
+	
+	
 
 	@Override
 	public LoanApplication viewApplicationStatusById(int id) throws LoanException
@@ -270,10 +381,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			while(rs.next())
 			{
 				obj=new LoanApplication(rs.getInt("Application_Id"),
-						rs.getDate("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
+						rs.getTimestamp("application_date"),rs.getString("Loan_program"),rs.getInt("AmountofLoan")
 						,rs.getString("AddressofProperty"),rs.getInt("AnnualFamilyIncome")
 						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
-						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview"));
+						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getTimestamp("DateOfInterview"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -283,6 +394,9 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		
 		return obj;
 	}
+	
+	
+	
 
 	@Override
 	public ArrayList<LoanProgramsOffered> viewLoanProgramOffered() throws LoanException 
@@ -323,16 +437,39 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			}
 		}
 		//daoLogger.info("All data retrieved \n"+empList);
-		// TODO Auto-generated method stub
 		return loanList;
 		
 	}
+	
+	
+	
+	
 
 	@Override
+<<<<<<< HEAD
 	public LoanProgramsOffered getLoanProgramByName(String loanName) throws LoanException
 	{
 		
 		return null;
+=======
+	public LoanProgramsOffered getLoanProgramByName(String loanName) throws LoanException {
+		LoanProgramsOffered lpo = null;
+		try
+		{
+			con=DBUtil.getConn();
+			String updateQry="select * from LoanProgramsOffered where ProgramName=?";
+			pst=con.prepareStatement(updateQry);
+			pst.setString(1, loanName);
+			rs = pst.executeQuery();
+			lpo= (LoanProgramsOffered)rs.getObject(1);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return lpo;
+		
+>>>>>>> 3cb2d6012fc4ae0e9c8bfd5956358940913584a0
 	}
 
 }
