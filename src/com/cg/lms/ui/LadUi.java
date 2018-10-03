@@ -1,10 +1,12 @@
 package com.cg.lms.ui;
 
 import java.sql.Date;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.cg.lms.bean.ApprovedLoans;
+import com.cg.lms.bean.CustomerDetails;
 import com.cg.lms.bean.LoanApplication;
 import com.cg.lms.bean.LoanProgramsOffered;
 import com.cg.lms.exception.LoanException;
@@ -16,6 +18,10 @@ public class LadUi
 	LoanManagementService lService=null;
 	Scanner sc = new Scanner(System.in);
 	ArrayList<LoanApplication> loanList=null;
+	LoanApplication la = null;
+	LoanProgramsOffered lpo = null;
+	CustomerDetails cd = null;
+	String cdname;
 	public void ladUiMethod()
 	{
 
@@ -117,7 +123,6 @@ public class LadUi
 	{
 		
 		ArrayList<LoanProgramsOffered> loanList;
-		// TODO Auto-generated method stub
 		try {
 			loanList=lService.viewLoanProgramOffered();
 			System.out.println("\tProgramName \tdescription \ttype \tdurationinyears \tminloanamount \tmaxloanamount \trateofinterest \tproofs_required");
@@ -135,13 +140,79 @@ public class LadUi
 
 	private void changeStatusAfterInterviewUi() 
 	{
-		// TODO Auto-generated method stub
-		
+		ApprovedLoans al =null;
+		try
+		{
+			System.out.println("Enter the application Id of the application");
+			int id = sc.nextInt();
+			la = lService.viewApplicationStatusById(id);
+			lpo = lService.getLoanProgramByName(la.getLoan_program());
+			System.out.println(lpo);
+			cdname = lService.getCustomerDetailsByAppId(id);
+			System.out.println("The application details are");
+			System.out.println(la);
+			System.out.println("Please set the new status as approved or rejected");
+			String newStatus= sc.next();
+			
+			
+			int data = lService.setStatusAfterInterview(id, newStatus);
+			if(data==1)
+				System.out.println("Status is successfully updated");
+			
+			if(data==1 && newStatus.equals("approved"))
+			{
+				System.out.println(cdname);
+				String custName = cdname;
+				System.out.println("Please ented the sum to be granted to the applicant");
+				double amtGranted = sc.nextDouble();
+				double interest = lpo.getRateofinterest();
+				System.out.println("Enter the dowm payment amount");
+				double downPayment = sc.nextDouble();
+				int duration = lpo.getDurationinyears();
+				double totalAmtPayable = amtGranted + (amtGranted*interest*duration/100);
+				double installments = (totalAmtPayable - downPayment)/(duration*12);
+				
+				al = new ApprovedLoans(id,custName,amtGranted,installments,duration,downPayment,interest,totalAmtPayable);
+				data = lService.addToApprovedLoan(al);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	private void updateApplicationStatusAndDateUi() 
 	{
-		// TODO Auto-generated method stub
+		Date sqlDate;
+		try
+		{
+			System.out.println("Enter the application Id of the application");
+			int id = sc.nextInt();
+			LoanApplication la = lService.viewApplicationStatusById(id);
+			System.out.println("The application details are");
+			System.out.println(la);
+			System.out.println("Please set the new status are accepted or rejected");
+			String newStatus= sc.next();
+			if(newStatus.equals("accepted"))
+			{
+				System.out.println("Enter the date of interview");
+				String date = sc.next();
+				java.util.Date utilDate = new SimpleDateFormat("dd-MMM-yy").parse(date);
+				sqlDate = new java.sql.Date(utilDate.getTime());
+			}
+			else 
+			{
+				sqlDate = null;
+			}
+			int data = lService.updateApplicationStatus(id, newStatus, sqlDate);
+			if(data==1)
+				System.out.println("Status and date are successfully updated");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		
 	}
 

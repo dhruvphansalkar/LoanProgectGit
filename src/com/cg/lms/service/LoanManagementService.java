@@ -29,16 +29,17 @@ public interface LoanManagementService {
 	public ArrayList<LoanApplication> viewApplicationByLoanProgram(String programName) throws LoanException;
 	public int updateApplicationStatus(int appId, String newStatus, Date date) throws LoanException;//change satus, add date
 	public int setStatusAfterInterview(int appId, String newStatus) throws LoanException;
-	
+	public int addToApprovedLoan(ApprovedLoans ap) throws LoanException;
 	//These methods are for the customer
 	public int addCustomerDetails(LoanApplication loanApp, CustomerDetails custDetails) throws LoanException;
-	public LoanApplication viewApplicationStatusById(int id) throws LoanException;
+	
 	
 	//methods for everyone
 	public ArrayList<LoanProgramsOffered> viewLoanProgramOffered() throws LoanException;
 	
 	//utilitymethod
 	public LoanProgramsOffered getLoanProgramByName(String loanName) throws LoanException;
-	
+	public String getCustomerDetailsByAppId(int id) throws LoanException;
+	public LoanApplication viewApplicationStatusById(int id) throws LoanException;
 	
 }

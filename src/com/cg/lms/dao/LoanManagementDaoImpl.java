@@ -156,7 +156,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 
 	@Override
 	public ArrayList<LoanApplication> viewAcceptedLoans() throws LoanException {
-		ArrayList<LoanApplication> Llist=null;
+		ArrayList<LoanApplication> Llist=new ArrayList<LoanApplication>();
 		try {
 			con=DBUtil.getConn();
 			String selectQry="select * from LoanApplication where Status='accepted'";
@@ -186,7 +186,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 
 	@Override
 	public ArrayList<LoanApplication> viewRejectedLoans() throws LoanException {
-		ArrayList<LoanApplication> Llist=null;
+		ArrayList<LoanApplication> Llist=new ArrayList<LoanApplication>();
 		try {
 			con=DBUtil.getConn();
 			String selectQry="select * from LoanApplication where Status='rejected'";
@@ -216,7 +216,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	@Override
 	public ArrayList<ApprovedLoans> viewApprovedLoans() throws LoanException
 	{
-		ArrayList<ApprovedLoans> Llist=null;
+		ArrayList<ApprovedLoans> Llist=new ArrayList<ApprovedLoans>();
 		try {
 			con=DBUtil.getConn();
 			String selectQry="select * from ApprovedLoans";
@@ -263,7 +263,6 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw new LoanException(e.getMessage());
 		}
@@ -387,8 +386,8 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 						,rs.getString("DocumentProofsAvailable"),rs.getString("GuaranteeCover")
 						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview"));
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) 
+		{
 			e.printStackTrace();
 			throw new LoanException(e.getMessage());
 		}
@@ -448,22 +447,79 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 
 	@Override
 	public LoanProgramsOffered getLoanProgramByName(String loanName) throws LoanException {
-		LoanProgramsOffered lpo = null;
+		LoanProgramsOffered obj = null;
 		try
 		{
 			con=DBUtil.getConn();
-			String updateQry="select * from LoanProgramsOffered where ProgramName=?";
-			pst=con.prepareStatement(updateQry);
-			pst.setString(1, loanName);
+			System.out.println(loanName);
+			String selectQry="select * from LoanProgramsOffered where ProgramName=?";
+			pst=con.prepareStatement(selectQry);
+			pst.setString(1,loanName);
 			rs = pst.executeQuery();
-			lpo= (LoanProgramsOffered)rs.getObject(1);
+			while(rs.next())
+			{
+				obj=new LoanProgramsOffered(rs.getString("PROGRAMNAME"), rs.getString("DESCRIPTION"), rs.getString("TYPE"), rs.getInt("DURATIONINYEARS"),rs.getDouble("MINLOANAMOUNT"), rs.getDouble("MAXLOANAMOUNT"), rs.getDouble("RATEOFINTEREST"), rs.getString("PROOFS_REQUIRED"));
+			}
+		} catch (Exception e) 
+		{
+			e.printStackTrace();
+			throw new LoanException(e.getMessage());
+		}
+			
+		return obj;	
+	
+
+	}
+	
+	@Override
+	public String getCustomerDetailsByAppId(int id) throws LoanException
+	{
+		CustomerDetails cd = null;
+		String s=null;
+		try
+		{
+			
+			con=DBUtil.getConn();
+			String updateQry="select * from CustomerDetails where Application_Id=?";
+			pst=con.prepareStatement(updateQry);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			rs.next();
+			s= rs.getString("APPLICANT_NAME");
+			//cd = (CustomerDetails)rs.getObject(1);
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		return lpo;
+		return s;
+	}
 
+
+	
+
+	@Override
+	public int addToApprovedLoan(ApprovedLoans ap) throws LoanException {
+		String insertQry="insert into ApprovedLoans values (?,?,?,?,?,?,?,?)";
+		try 
+		{
+			con=DBUtil.getConn();
+			pst=con.prepareStatement(insertQry);
+			pst.setInt(1, ap.getApplication_Id());
+			pst.setString(2, ap.getCustomer_name());
+			pst.setDouble(3, ap.getAmountofloangranted());
+			pst.setDouble(4, ap.getMonthlyinstallment());
+			pst.setDouble(5, ap.getYearstimeperiod());
+			pst.setDouble(6, ap.getDownpayment());
+			pst.setDouble(7, ap.getRateofinterest());
+			pst.setDouble(8, ap.getTotalamountpayable());
+			data = pst.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return data;
 	}
 
 }

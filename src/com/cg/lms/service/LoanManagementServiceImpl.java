@@ -111,5 +111,14 @@ public class LoanManagementServiceImpl implements LoanManagementService
 		// TODO Auto-generated method stub
 		return ldao.getLoanProgramByName(loanName);
 	}
+	@Override
+	public String getCustomerDetailsByAppId(int id)throws LoanException 
+	{
+		return ldao.getCustomerDetailsByAppId(id);
+	}
+	@Override
+	public int addToApprovedLoan(ApprovedLoans ap) throws LoanException {
+		return ldao.addToApprovedLoan(ap);
+	}
 
 }
