@@ -229,10 +229,8 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 					+ "AnnualFamilyIncome,DocumentProofsAvailable,GuaranteeCover,MarketValueOfGuaranteeCover,"
 					+ "AmountofLoan,Application_Date) values(sequence_app_id.nextval,?,?,?,?,?,?,?,?)";
 			pst2=con.prepareStatement(insertQry2);
-			String a = loanApp.getLoan_program();
-			System.out.println(a);
-			System.out.println(loanApp);
-			pst2.setString(1, a);
+			
+			pst2.setString(1, loanApp.getLoan_program());
 			pst2.setString(2, loanApp.getAddressofProperty());
 			pst2.setInt(3, loanApp.getAnnualFamilyIncome());
 			pst2.setString(4, loanApp.getDocumentProofsAvailable());
