@@ -147,10 +147,18 @@ public class LadUi
 			int id = sc.nextInt();
 			la = lService.viewApplicationStatusById(id);
 			lpo = lService.getLoanProgramByName(la.getLoan_program());
-			System.out.println(lpo);
 			cdname = lService.getCustomerDetailsByAppId(id);
 			System.out.println("The application details are");
+			System.out.println();
 			System.out.println(la);
+			if(la.getStatus().equals("approved"))
+					{
+						System.out.println();
+						System.out.println("This application has already been accepted");
+						System.out.println();
+					}
+			else
+			{
 			System.out.println("Please set the new status as approved or rejected");
 			String newStatus= sc.next();
 			
@@ -163,7 +171,7 @@ public class LadUi
 			{
 				System.out.println(cdname);
 				String custName = cdname;
-				System.out.println("Please ented the sum to be granted to the applicant");
+				System.out.println("Please enter the sum to be granted to the applicant");
 				double amtGranted = sc.nextDouble();
 				double interest = lpo.getRateofinterest();
 				System.out.println("Enter the dowm payment amount");
@@ -173,7 +181,13 @@ public class LadUi
 				double installments = (totalAmtPayable - downPayment)/(duration*12);
 				
 				al = new ApprovedLoans(id,custName,amtGranted,installments,duration,downPayment,interest,totalAmtPayable);
-				data = lService.addToApprovedLoan(al);
+				int data1 = lService.addToApprovedLoan(al);
+				
+				if(data1 == 1)
+				{
+					System.out.println("The loan has been approved and added to the required database");
+				}
+			}
 			}
 		}
 		catch(Exception e)
@@ -187,27 +201,37 @@ public class LadUi
 		Date sqlDate;
 		try
 		{
+			
 			System.out.println("Enter the application Id of the application");
 			int id = sc.nextInt();
 			LoanApplication la = lService.viewApplicationStatusById(id);
 			System.out.println("The application details are");
 			System.out.println(la);
-			System.out.println("Please set the new status are accepted or rejected");
-			String newStatus= sc.next();
-			if(newStatus.equals("accepted"))
+		
+			if(la.getStatus().equals("approved") || la.getStatus().equals("accepted"))
 			{
-				System.out.println("Enter the date of interview");
-				String date = sc.next();
-				java.util.Date utilDate = new SimpleDateFormat("dd-MMM-yy").parse(date);
-				sqlDate = new java.sql.Date(utilDate.getTime());
+				System.out.println("Applroval has already been performed");
+				
 			}
-			else 
+			else
 			{
-				sqlDate = null;
-			}
-			int data = lService.updateApplicationStatus(id, newStatus, sqlDate);
-			if(data==1)
+				System.out.println("Please set the new status are accepted or rejected");
+				String newStatus= sc.next();
+				if(newStatus.equals("accepted"))
+				{
+					System.out.println("Enter the date of interview");
+					String date = sc.next();
+					java.util.Date utilDate = new SimpleDateFormat("dd-MMM-yy").parse(date);
+					sqlDate = new java.sql.Date(utilDate.getTime());
+				}
+				else 
+				{
+					sqlDate = null;
+				}
+				int data = lService.updateApplicationStatus(id, newStatus, sqlDate);
+				if(data==1)
 				System.out.println("Status and date are successfully updated");
+			}
 		}
 		catch(Exception e)
 		{
