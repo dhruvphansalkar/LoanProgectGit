@@ -3,6 +3,8 @@ package com.cg.lms.ui;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.cg.lms.bean.ApprovedLoans;
+import com.cg.lms.bean.LoanApplication;
 import com.cg.lms.bean.LoanProgramsOffered;
 import com.cg.lms.exception.LoanException;
 import com.cg.lms.service.LoanManagementService;
@@ -52,11 +54,11 @@ public class AdminUi {
 							break;
 						case 4:updateLoan();
 							break;
-						case 5:
+						case 5:AcceptedLoans();
 							break;
-						case 6:
+						case 6:RejectedLoans();
 							break;
-						case 7:
+						case 7:ApprovedLoans();
 							break;
 						case 8:
 							System.exit(0);
@@ -85,6 +87,95 @@ public class AdminUi {
 	}
 	
 	
+	private void ApprovedLoans()
+	{
+		 ArrayList<ApprovedLoans> loanList;
+		try {
+			loanList= lService.viewApprovedLoans();
+			System.out.println("\tApplication_Id \tCustomer_name \tAmountofloangranted()"
+					+ " \tMonthlyinstallment \tYearstimeperiod \tDownpayment"
+					+ " \tRateofinterest \tTotalamountpayable");
+			for(ApprovedLoans l:loanList)
+			{
+				System.out.println("\t"+l.getApplication_Id()+
+						"\t"+l.getCustomer_name()+"\t"+l.getAmountofloangranted()+
+						"\t"+l.getMonthlyinstallment()+"\t"+l.getYearstimeperiod()+
+						"\t"+l.getDownpayment()+"\t"+l.getRateofinterest()+
+						"\t"+l.getTotalamountpayable());
+			}
+		} 
+		catch (LoanException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+
+	private void RejectedLoans() 
+	{
+		ArrayList<LoanApplication> loanList;
+		try {
+			loanList= lService.viewRejectedLoans();
+			System.out.println("\tApplication_Id \tApplication_date \tLoan_program()"
+					+ " \tAmountofLoan \tAddressofProperty \tAnnualFamilyIncome"
+					+ " \tDocumentProofsAvailable \tGuaranteeCover \tMarketValueofGuaranteeCover "
+					+ "\tStatus \tDateOfInterview");
+			for(LoanApplication l:loanList)
+			{
+				System.out.println("\t"+l.getApplication_Id()+
+						"\t"+l.getApplication_date()+"\t"+l.getLoan_program()+
+						"\t"+l.getAmountofLoan()+"\t"+l.getAddressofProperty()+
+						"\t"+l.getAnnualFamilyIncome()+"\t"+l.getDocumentProofsAvailable()+
+						"\t"+l.getGuaranteeCover()+"\t"+l.getMarketValueofGuaranteeCover()+
+						"\t"+l.getStatus()+"\t"+l.getDateOfInterview());
+			}
+		} 
+		catch (LoanException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+
+		
+	}
+
+
+	private void AcceptedLoans() 
+	{
+		
+		ArrayList<LoanApplication> loanList;
+		try {
+			loanList= lService.viewAcceptedLoans();
+			System.out.println("\tApplication_Id \tApplication_date \tLoan_program()"
+					+ " \tAmountofLoan \tAddressofProperty \tAnnualFamilyIncome"
+					+ " \tDocumentProofsAvailable \tGuaranteeCover \tMarketValueofGuaranteeCover "
+					+ "\tStatus \tDateOfInterview");
+			for(LoanApplication l:loanList)
+			{
+				System.out.println("\t"+l.getApplication_Id()+
+						"\t"+l.getApplication_date()+"\t"+l.getLoan_program()+
+						"\t"+l.getAmountofLoan()+"\t"+l.getAddressofProperty()+
+						"\t"+l.getAnnualFamilyIncome()+"\t"+l.getDocumentProofsAvailable()+
+						"\t"+l.getGuaranteeCover()+"\t"+l.getMarketValueofGuaranteeCover()+
+						"\t"+l.getStatus()+"\t"+l.getDateOfInterview());
+			}
+		} 
+		catch (LoanException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		
+	}
+
+
 	private void displayAllLoans() 
 	{
 		
