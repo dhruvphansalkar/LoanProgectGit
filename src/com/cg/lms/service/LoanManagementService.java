@@ -11,6 +11,7 @@ import com.cg.lms.bean.LoanApplication;
 import com.cg.lms.bean.LoanProgramsOffered;
 import com.cg.lms.exception.LoanException;
 
+
 public interface LoanManagementService {
 	
 	
@@ -41,5 +42,16 @@ public interface LoanManagementService {
 	public LoanProgramsOffered getLoanProgramByName(String loanName) throws LoanException;
 	public String getCustomerDetailsByAppId(int id) throws LoanException;
 	public LoanApplication viewApplicationStatusById(int id) throws LoanException;
+	 
 	
+	//Validation methods
+	public boolean validateCustName(String ename) throws LoanException;
+	public boolean validatePhoneNo(int pno) throws LoanException;
+	public boolean validateMobileNo(int mno)throws LoanException;
+	public boolean validateEmailId(String mailid) throws LoanException;
+
+	public boolean validateLoanProgramName(String ename) throws LoanException;
+
+	public boolean validateLoanAmount(double min, double max, int amount)
+			throws LoanException;
 }

@@ -86,7 +86,7 @@ public class AdminUi {
 		}
 	}
 	
-	
+	//for viewing the Approved Loans  
 	private void ApprovedLoans()
 	{
 		 ArrayList<ApprovedLoans> loanList;
@@ -106,14 +106,13 @@ public class AdminUi {
 		} 
 		catch (LoanException e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
 	}
 
-
+	//for viewing the Rejected Loans 
 	private void RejectedLoans() 
 	{
 		ArrayList<LoanApplication> loanList;
@@ -135,7 +134,6 @@ public class AdminUi {
 		} 
 		catch (LoanException e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -144,7 +142,7 @@ public class AdminUi {
 		
 	}
 
-
+	//for viewing the Accepted Loans 
 	private void AcceptedLoans() 
 	{
 		
@@ -167,7 +165,6 @@ public class AdminUi {
 		} 
 		catch (LoanException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -175,12 +172,11 @@ public class AdminUi {
 		
 	}
 
-
+//for viewing all the Loan Programs offered
 	private void displayAllLoans() 
 	{
 		
 		ArrayList<LoanProgramsOffered> loanList;
-		// TODO Auto-generated method stub
 		try {
 			loanList=lService.viewLoanProgramOffered();
 			System.out.println("\tProgramName \tdescription \ttype \tdurationinyears \tminloanamount \tmaxloanamount \trateofinterest \tproofs_required");
@@ -188,12 +184,13 @@ public class AdminUi {
 			{
 				System.out.println("\t"+l.getProgramName()+"\t"+l.getDescription()+"\t"+l.getType()+"\t"+l.getDurationinyears()+"\t"+l.getMinloanamount()+"\t"+l.getMaxloanamount()+"\t"+l.getRateofinterest()+"\t"+l.getProofs_required());
 			}
-		} catch (LoanException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (LoanException e) 
+		{
 			e.printStackTrace();
 		}
 	}
-	
+	//Updating the Loan program details
 	private void updateLoan()
 	{
 		
@@ -224,13 +221,14 @@ public class AdminUi {
 				System.out.println("Sorry,data not Updated");
 			if(dataUpdated==1)
 				System.out.println("data updated");
-		} catch (LoanException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (LoanException e) 
+		{
 			e.printStackTrace();
 		}
 		
 	}
-	
+	//Adding the new Loan program details
 	private void insertLoan()
 	{
 		Scanner sc = new Scanner(System.in);
@@ -266,6 +264,7 @@ public class AdminUi {
 		}
 		
 	}
+	//Deleting Loan Program
 	private void deleteLoan()
 	{
 		
