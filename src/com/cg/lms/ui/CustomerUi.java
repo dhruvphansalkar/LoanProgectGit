@@ -134,6 +134,7 @@ public class CustomerUi
 			lService.validateCustName(name);
 			System.out.println("Enter your date of birth");
 			String date = sc.next();
+			lService.validateDateFormat(date);
 			java.util.Date utilDate = new SimpleDateFormat("dd-MMM-yy").parse(date);
 			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 			System.out.println("Enter your marital status");

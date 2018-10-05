@@ -1,7 +1,10 @@
 package com.cg.lms.service;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.cg.lms.bean.ApprovedLoans;
@@ -189,4 +192,17 @@ public class LoanManagementServiceImpl implements LoanManagementService
 			throw new LoanException("\n Loan Amount should be within a valid range .");
 		}
 	}
+	@Override
+	public boolean validateDateFormat(String Date) throws LoanException 
+	{
+		
+		String regex = "^(1[0-2]|0[1-9])/(3[01]"
+                + "|[12][0-9]|0[1-9])/[0-9]{4}$"; 
+		Pattern pattern = Pattern.compile(regex); 
+		Matcher matcher = pattern.matcher((CharSequence)Date);
+		return matcher.matches(); 
+	}
+	
+
+	
 }

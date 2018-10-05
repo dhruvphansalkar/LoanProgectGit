@@ -52,6 +52,6 @@ public interface LoanManagementService {
 
 	public boolean validateLoanProgramName(String ename) throws LoanException;
 
-	public boolean validateLoanAmount(double min, double max, int amount)
-			throws LoanException;
+	public boolean validateLoanAmount(double min, double max, int amount)throws LoanException;
+	public boolean validateDateFormat(String date) throws LoanException; 
 }
