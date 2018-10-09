@@ -56,7 +56,6 @@ public class LoanTest {
 		catch(NullPointerException e){
 			System.out.println("success");
 		}
-			
 	} 
 }
 

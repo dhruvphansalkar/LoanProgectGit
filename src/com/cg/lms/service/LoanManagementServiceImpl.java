@@ -193,14 +193,25 @@ public class LoanManagementServiceImpl implements LoanManagementService
 		}
 	}
 	@Override
-	public boolean validateDateFormat(String Date) throws LoanException 
+	public boolean validateDateFormat(String date) throws LoanException 
 	{
 		
-		String regex = "^(1[0-2]|0[1-9])/(3[01]"
-                + "|[12][0-9]|0[1-9])/[0-9]{4}$"; 
-		Pattern pattern = Pattern.compile(regex); 
-		Matcher matcher = pattern.matcher((CharSequence)Date);
-		return matcher.matches(); 
+		String regex = "^[0-3]{1}[0-9]{1}-[A-Z]{3}-[0-9]{2}$"; 
+		if(Pattern.matches(regex, date))
+			return true;
+		else
+		{
+			throw new LoanException("\n Date should be in DD-MMM-YY format.");
+		}
+	}
+	@Override
+	public boolean validateDocument(String docProof, String document) throws LoanException {
+		if(docProof.equals(document))
+			return true;
+		else
+		{
+			throw new LoanException("\n"+document+"is required.");
+		}
 	}
 	
 

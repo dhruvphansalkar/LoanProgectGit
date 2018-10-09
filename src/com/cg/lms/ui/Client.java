@@ -12,7 +12,7 @@ import com.cg.lms.service.LoanManagementServiceImpl;
 public class Client {
 	static LoanManagementService lService=null;
 	static Scanner sc=null;
-	public static void main(String[] args) 
+	public static void main(String[] args) throws LoanException 
 	{
 		lService= new LoanManagementServiceImpl();
 		sc=new Scanner(System.in);

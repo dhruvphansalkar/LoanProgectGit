@@ -13,7 +13,7 @@ import com.cg.lms.service.LoanManagementServiceImpl;
 public class AdminUi {
 	Scanner sc = new Scanner(System.in);
 	LoanManagementService lService=null;
-	public void adminUiMethod()
+	public void adminUiMethod() throws LoanException
 	{
 		lService= new LoanManagementServiceImpl();
 		System.out.println("********Admin Login Page*********");
@@ -43,7 +43,7 @@ public class AdminUi {
 						+ "7)View all approved loans ");
 				System.out.println("Enter your choice:");
 				int c=sc.nextInt();
-				do{///////////////////////
+				do{
 				switch(c)
 					{
 						case 1:displayAllLoans();
@@ -82,12 +82,12 @@ public class AdminUi {
 		} 
 		catch (LoanException e)
 		{
-			e.printStackTrace();
+			throw new LoanException("Wrong credentials.Please retry.");
 		}
 	}
 	
 	//for viewing the Approved Loans  
-	private void ApprovedLoans()
+	private void ApprovedLoans() throws LoanException
 	{
 		 ArrayList<ApprovedLoans> loanList;
 		try {
@@ -106,14 +106,14 @@ public class AdminUi {
 		} 
 		catch (LoanException e) 
 		{
-			e.printStackTrace();
+			throw new LoanException("We are unable to fetch your query at this moment.");
 		}
 		
 		
 	}
 
 	//for viewing the Rejected Loans 
-	private void RejectedLoans() 
+	private void RejectedLoans() throws LoanException 
 	{
 		ArrayList<LoanApplication> loanList;
 		try {
@@ -134,7 +134,7 @@ public class AdminUi {
 		} 
 		catch (LoanException e) 
 		{
-			e.printStackTrace();
+			throw new LoanException("We are unable to fetch your query at this moment.");
 		}
 		
 
@@ -143,7 +143,7 @@ public class AdminUi {
 	}
 
 	//for viewing the Accepted Loans 
-	private void AcceptedLoans() 
+	private void AcceptedLoans() throws LoanException 
 	{
 		
 		ArrayList<LoanApplication> loanList;
@@ -165,7 +165,7 @@ public class AdminUi {
 		} 
 		catch (LoanException e)
 		{
-			e.printStackTrace();
+			throw new LoanException("We are unable to fetch your query at this moment.");
 		}
 		
 
@@ -179,11 +179,10 @@ public class AdminUi {
 		ArrayList<LoanProgramsOffered> loanList;
 		try {
 			loanList=lService.viewLoanProgramOffered();
-			System.out.println("\tProgramName \tdescription \ttype \tdurationinyears \tminloanamount \tmaxloanamount \trateofinterest \tproofs_required");
+			System.out.println("\tProgramName \tdescription \t\ttype \tdurationinyears \tminloanamount \tmaxloanamount \trateofinterest \tproofs_required");
 			for(LoanProgramsOffered l:loanList)
 			{
-				System.out.println("\t"+l.getProgramName()+"\t"+l.getDescription()+"\t"+l.getType()+"\t"+l.getDurationinyears()+"\t"+l.getMinloanamount()+"\t"+l.getMaxloanamount()+"\t"+l.getRateofinterest()+"\t"+l.getProofs_required());
-			}
+				System.out.println("\t"+l.getProgramName()+"\t"+l.getDescription()+"\t"+l.getType()+"\t\t"+l.getDurationinyears()+"\t\t\t"+l.getMinloanamount()+"\t\t"+l.getMaxloanamount()+"\t\t"+l.getRateofinterest()+"\t\t"+l.getProofs_required());			}
 		} 
 		catch (LoanException e) 
 		{
@@ -191,7 +190,7 @@ public class AdminUi {
 		}
 	}
 	//Updating the Loan program details
-	private void updateLoan()
+	private void updateLoan() throws LoanException
 	{
 		
 		System.out.println("Enter Loan Program you want to update:");
@@ -224,12 +223,12 @@ public class AdminUi {
 		} 
 		catch (LoanException e) 
 		{
-			e.printStackTrace();
+			throw new LoanException("Sorry the loan program cannot be updated at this moment.");
 		}
 		
 	}
 	//Adding the new Loan program details
-	private void insertLoan()
+	private void insertLoan() throws LoanException
 	{
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Loan Program:");
@@ -260,12 +259,12 @@ public class AdminUi {
 		catch (LoanException e) 
 		{
 			
-			e.printStackTrace();
+			throw new LoanException("Sorry the loan program cannot be inserted at this moment.");
 		}
 		
 	}
 	//Deleting Loan Program
-	private void deleteLoan()
+	private void deleteLoan() throws LoanException
 	{
 		
 		System.out.println("Enter the Loan Name which you want to delete");
@@ -278,7 +277,7 @@ public class AdminUi {
 		}
 		catch (LoanException e) 
 		{
-			e.printStackTrace();
+			throw new LoanException("Sorry the loan program cannot be deleted at this moment.");
 		}
 	}
 

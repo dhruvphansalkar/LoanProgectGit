@@ -22,7 +22,7 @@ public class LadUi
 	LoanProgramsOffered lpo = null;
 	CustomerDetails cd = null;
 	String cdname;
-	public void ladUiMethod()
+	public void ladUiMethod() throws LoanException
 	{
 
 		lService= new LoanManagementServiceImpl();
@@ -87,12 +87,12 @@ public class LadUi
 			} 
 			catch (LoanException e)
 			{
-				e.printStackTrace();
+				throw new LoanException("Wrong credentials.Please retry.");
 			}
 		
 	}
-	//
-	private void viewAppByLoanProg() 
+	
+	private void viewAppByLoanProg() throws LoanException 
 	{
 		
 		System.out.println("Enter the loan program name to view applications:");
@@ -116,30 +116,29 @@ public class LadUi
 		catch (LoanException e) 
 		{
 			
-			e.printStackTrace();
+			throw new LoanException("Please enter the correct loan program");
 		}
 		
 	}
-	private void displayAllLoans() 
+	private void displayAllLoans() throws LoanException 
 	{
 		
 		ArrayList<LoanProgramsOffered> loanList;
 		try {
 			loanList=lService.viewLoanProgramOffered();
-			System.out.println("\tProgramName \tdescription \ttype \tdurationinyears \tminloanamount \tmaxloanamount \trateofinterest \tproofs_required");
+			System.out.println("\tProgramName \tdescription \t\ttype \tdurationinyears \tminloanamount \tmaxloanamount \trateofinterest \tproofs_required");
 			for(LoanProgramsOffered l:loanList)
 			{
-				System.out.println("\t"+l.getProgramName()+"\t"+l.getDescription()+"\t"+l.getType()+"\t"+l.getDurationinyears()+"\t"+l.getMinloanamount()+"\t"+l.getMaxloanamount()+"\t"+l.getRateofinterest()+"\t"+l.getProofs_required());
-			}
+				System.out.println("\t"+l.getProgramName()+"\t"+l.getDescription()+"\t"+l.getType()+"\t\t"+l.getDurationinyears()+"\t\t\t"+l.getMinloanamount()+"\t\t"+l.getMaxloanamount()+"\t\t"+l.getRateofinterest()+"\t\t"+l.getProofs_required());			}
 		} catch (LoanException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			throw new LoanException("Sorry for the inconvenience");
 		}
 	}
 	
 
 
-	private void changeStatusAfterInterviewUi() 
+	private void changeStatusAfterInterviewUi() throws LoanException 
 	{
 		ApprovedLoans al =null;
 		try
@@ -193,11 +192,11 @@ public class LadUi
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
+			throw new LoanException("Please enter the correct status");
 		}
 	}
 
-	private void updateApplicationStatusAndDateUi() 
+	private void updateApplicationStatusAndDateUi() throws LoanException 
 	{
 		Date sqlDate;
 		try
@@ -222,6 +221,7 @@ public class LadUi
 				{
 					System.out.println("Enter the date of interview");
 					String date = sc.next();
+					lService.validateDateFormat(date);
 					java.util.Date utilDate = new SimpleDateFormat("dd-MMM-yy").parse(date);
 					sqlDate = new java.sql.Date(utilDate.getTime());
 				}
@@ -236,7 +236,7 @@ public class LadUi
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
+			throw new LoanException("Please enter the correct status");
 		}
 		
 	}

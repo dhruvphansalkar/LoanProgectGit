@@ -10,6 +10,9 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 import com.cg.lms.bean.ApprovedLoans;
 import com.cg.lms.bean.CustomerDetails;
 import com.cg.lms.bean.LoanApplication;
@@ -20,7 +23,7 @@ import com.cg.lms.util.DBUtil;
 public class LoanManagementDaoImpl implements LoanManagementDao 
 {
 
-	//Logger daoLogger=null;
+	Logger daoLogger=null;
 	Connection con=null;
 	Statement st=null;
 	PreparedStatement pst=null;
@@ -28,7 +31,13 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 	ResultSet rs=null;
 	int data=0;
 	int data2=0;
-
+	
+	public LoanManagementDaoImpl()
+	{
+		daoLogger=Logger.getLogger(LoanManagementDaoImpl.class);
+		PropertyConfigurator.configure("log4j.properties");
+	}
+	
 	@Override
 	public int login(String username, String Password)throws LoanException //Tested and working
 	{
@@ -46,6 +55,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		} 
 		catch (Exception e) 
 		{
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 			throw new LoanException(e.getMessage());
 		}
@@ -60,7 +70,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			catch(SQLException e)
 			{
 				e.printStackTrace();
-				//daoLogger.error(e.getMessage());
+				daoLogger.error(e.getMessage());
 				throw new LoanException(e.getMessage());
 			}
 		}
@@ -91,10 +101,11 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		} 
 		catch (Exception e) 
 		{
-			// TODO Auto-generated catch block
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 			throw new LoanException(e.getMessage());
 		}
+		daoLogger.info(data+ "Data inserted");
 		return data;
 	}
 	
@@ -115,8 +126,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		} 
 		catch (Exception e) 
 		{
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 		}
+		daoLogger.info(returnval+ "Data deleted");
 		return returnval;
 	}
 	
@@ -145,8 +158,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		} 
 		catch (Exception e) 
 		{
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 		}
+		daoLogger.info(returnval+ "Data updated");
 		return returnval;
 	}
 	
@@ -171,11 +186,11 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 			throw new LoanException(e.getMessage());
 		}
-		
+		daoLogger.info("All Accepted loans \n"+Llist);
 		return Llist;
 	}
 	
@@ -201,11 +216,11 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 			throw new LoanException(e.getMessage());
 		}
-		
+		daoLogger.info("All rejected loans \n"+Llist);
 		return Llist;
 	}
 	
@@ -231,11 +246,11 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 						rs.getInt("rateofinterest"),rs.getInt("totalamountpayable")));
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 			throw new LoanException(e.getMessage());
 		}
-		
+		daoLogger.info("All approved loans \n"+Llist);
 		return Llist;
 	}
 	
@@ -263,10 +278,11 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 						,rs.getInt("MarketValueofGuaranteeCover"),rs.getString("Status"),rs.getDate("DateOfInterview")));
 			}
 		} catch (Exception e) {
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 			throw new LoanException(e.getMessage());
 		}
-		
+		daoLogger.info("Viewing application by loan Program \n"+Llist);
 		return Llist;
 	}
 	
@@ -289,8 +305,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		}
 		catch(Exception e)
 		{
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 		}
+		daoLogger.info("Application status updated \n");
 		return data;
 	}
 
@@ -310,8 +328,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		}
 		catch(Exception e)
 		{
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 		}
+		daoLogger.info("Status after interview updated");
 		return data;
 		
 	}
@@ -360,8 +380,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		}
 		catch(Exception e)
 		{
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 		}
+		daoLogger.info("Customer details inserted");
 		return data;
 	}
 	
@@ -388,10 +410,11 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			}
 		} catch (Exception e) 
 		{
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 			throw new LoanException(e.getMessage());
 		}
-		
+		daoLogger.info("viewing application status:"+obj);
 		return obj;
 	}
 	
@@ -412,12 +435,13 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			
 			while(rs.next())
 			{
-				//dao.info(new Employee(rs.getInt("emp_id"),rs.getString("emp_name"),rs.getFloat("emp_sal")));
+				//daoLogger.info(new LoanProgramsOffered(rs.getString("ProgramName"),rs.getString("description"),rs.getString("type"),rs.getInt("durationinyears"),rs.getDouble("minloanamount"),rs.getDouble("maxloanamount"),rs.getDouble("rateofinterest"),rs.getString("proofs_required")));
 				loanList.add(new LoanProgramsOffered(rs.getString("ProgramName"),rs.getString("description"),rs.getString("type"),rs.getInt("durationinyears"),rs.getDouble("minloanamount"),rs.getDouble("maxloanamount"),rs.getDouble("rateofinterest"),rs.getString("proofs_required")));
 			}
 		}
 		catch(Exception e)
 		{
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 			throw new LoanException(e.getMessage());
 		}
@@ -432,11 +456,11 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			catch(SQLException e)
 			{
 				e.printStackTrace();
-				//daoLogger.error(e.getMessage());
+				daoLogger.error(e.getMessage());
 				throw new LoanException(e.getMessage());
 			}
 		}
-		//daoLogger.info("All data retrieved \n"+empList);
+		daoLogger.info("All loan programs retrieved \n"+loanList);
 		return loanList;
 		
 	}
@@ -462,10 +486,10 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 			}
 		} catch (Exception e) 
 		{
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 			throw new LoanException(e.getMessage());
 		}
-			
 		return obj;	
 	
 
@@ -490,6 +514,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		}
 		catch(Exception e)
 		{
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 		}
 		return s;
@@ -517,6 +542,7 @@ public class LoanManagementDaoImpl implements LoanManagementDao
 		}
 		catch(Exception e)
 		{
+			daoLogger.error(e.getMessage());
 			e.printStackTrace();
 		}
 		return data;

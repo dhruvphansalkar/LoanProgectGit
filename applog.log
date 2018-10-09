@@ -1,0 +1,15 @@
+2018-10-06 19:48:39,949 - com.cg.lms.dao.LoanManagementDaoImpl - INFO - All Accepted loans 
+[LoanApplication [Application_Id=102, application_date=2018-10-03, Loan_program=c, AmountofLoan=3, AddressofProperty=c, AnnualFamilyIncome=3, DocumentProofsAvailable=c, GuaranteeCover=c, MarketValueofGuaranteeCover=3, Status=accepted, DateOfInterview=2018-10-12]]
+2018-10-06 19:48:42,911 - com.cg.lms.dao.LoanManagementDaoImpl - INFO - All loan programs retrieved 
+[LoanProgramsOffered [ProgramName=Program_A, description=Long_Term, type=Construction, durationinyears=20, minloanamount=10.0, maxloanamount=100.0, rateofinterest=3.0, proofs_required=Aadhar]]
+2018-10-09 09:23:23,883 - com.cg.lms.dao.LoanManagementDaoImpl - INFO - viewing application status:LoanApplication [Application_Id=104, application_date=2018-10-03, Loan_program=Program_A, AmountofLoan=1000, AddressofProperty=Mumbai, AnnualFamilyIncome=1000, DocumentProofsAvailable=Aadhar, GuaranteeCover=House, MarketValueofGuaranteeCover=100, Status=approved, DateOfInterview=null]
+2018-10-09 09:37:20,237 - com.cg.lms.dao.LoanManagementDaoImpl - INFO - All loan programs retrieved 
+[LoanProgramsOffered [ProgramName=Program_A, description=Long_Term, type=Construction, durationinyears=20, minloanamount=10.0, maxloanamount=100.0, rateofinterest=3.0, proofs_required=Aadhar]]
+2018-10-09 09:37:38,431 - com.cg.lms.dao.LoanManagementDaoImpl - INFO - All loan programs retrieved 
+[LoanProgramsOffered [ProgramName=Program_A, description=Long_Term, type=Construction, durationinyears=20, minloanamount=10.0, maxloanamount=100.0, rateofinterest=3.0, proofs_required=Aadhar]]
+2018-10-09 09:39:06,656 - com.cg.lms.dao.LoanManagementDaoImpl - INFO - All loan programs retrieved 
+[LoanProgramsOffered [ProgramName=Program_A, description=Long_Term, type=Construction, durationinyears=20, minloanamount=10.0, maxloanamount=100.0, rateofinterest=3.0, proofs_required=Aadhar]]
+2018-10-09 09:40:06,535 - com.cg.lms.dao.LoanManagementDaoImpl - INFO - All loan programs retrieved 
+[LoanProgramsOffered [ProgramName=Program_A, description=Long_Term, type=Construction, durationinyears=20, minloanamount=10.0, maxloanamount=100.0, rateofinterest=3.0, proofs_required=Aadhar]]
+2018-10-09 09:42:09,206 - com.cg.lms.dao.LoanManagementDaoImpl - INFO - All loan programs retrieved 
+[LoanProgramsOffered [ProgramName=Program_A, description=Long_Term, type=Construction, durationinyears=20, minloanamount=10.0, maxloanamount=100.0, rateofinterest=3.0, proofs_required=Aadhar]]

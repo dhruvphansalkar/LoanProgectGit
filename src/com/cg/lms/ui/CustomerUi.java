@@ -25,16 +25,16 @@ public class CustomerUi
 	LoanApplication loanApp = null;
 	CustomerDetails cd = null;
 	
-	public void cuiMethod()
+	public void cuiMethod() throws LoanException
 	{
 		lService= new LoanManagementServiceImpl();
-		System.out.println("+++++++++Welcome Customer Namaskar +++++++++++");
+		System.out.println("+++++++++Welcome Customer+++++++++++");
 		int c=0;
 		System.out.println("Select Operation to be performed:");
 		System.out.println("1)View all loan Programs \n"
 				+ "2)View Application status by ID \n"
 				+ "3)Apply for Loan \n"
-				+ "4)Exit ");
+				+ "\n 4)Exit ");
 		System.out.println("Enter your choice:");
 		c=sc.nextInt();
 		do
@@ -62,7 +62,7 @@ public class CustomerUi
 		}while(c!=4);
 	}
 	//For viewing Application status of customer by ID
-	private void viewAppStatusByID()
+	private void viewAppStatusByID() throws LoanException
 	{
 		System.out.println("Enter Your Application Id");
 		int app_id=sc.nextInt();
@@ -73,12 +73,12 @@ public class CustomerUi
 		}
 		catch (LoanException e) 
 		{
-			e.printStackTrace();
+			throw new LoanException("Please check the application status");
 		}
 	}
 
 //For viewing all the loan programs offered
-	private void displayAllLoans() 
+	private void displayAllLoans() throws LoanException 
 	{
 		
 		ArrayList<LoanProgramsOffered> loanList;
@@ -88,15 +88,15 @@ public class CustomerUi
 			lService = new LoanManagementServiceImpl();
 
 			loanList=lService.viewLoanProgramOffered();
-			System.out.println("\tProgramName \tdescription \ttype \tdurationinyears \tminloanamount \tmaxloanamount \trateofinterest \tproofs_required");
+			System.out.println("\tProgramName \tdescription \t\ttype \tdurationinyears \tminloanamount \tmaxloanamount \trateofinterest \tproofs_required");
 			for(LoanProgramsOffered l:loanList)
 			{
-				System.out.println("\t"+l.getProgramName()+"\t"+l.getDescription()+"\t"+l.getType()+"\t"+l.getDurationinyears()+"\t"+l.getMinloanamount()+"\t"+l.getMaxloanamount()+"\t"+l.getRateofinterest()+"\t"+l.getProofs_required());
+				System.out.println("\t"+l.getProgramName()+"\t"+l.getDescription()+"\t"+l.getType()+"\t\t"+l.getDurationinyears()+"\t\t\t"+l.getMinloanamount()+"\t\t"+l.getMaxloanamount()+"\t\t"+l.getRateofinterest()+"\t\t"+l.getProofs_required());
 			}
 		} 
 		catch (LoanException e) 
 		{
-			e.printStackTrace();
+			throw new LoanException("Sorry for the inconvenience");
 		}
 	}
 
@@ -111,19 +111,23 @@ public class CustomerUi
 			System.out.println("Enter the Loan Program you want to avail");
 			String prog = sc.next();
 			lService.validateLoanProgramName(prog);
+			LoanProgramsOffered obj=lService.getLoanProgramByName(prog);
 			System.out.println("Enter your address");
 			String address = sc.next();
 			System.out.println("Enter your annual family Income");
 			int income = sc.nextInt();
 			System.out.println("Document proofs available");
 			String docProof = sc.next();
+			String document=obj.getProofs_required();
+			System.out.println(document);
+			lService.validateDocument(docProof,document);
 			System.out.println("Enter the collateral against the loan");
 			String guarentee = sc.next();
 			System.out.println("Enter the value of the collateral");
 			int guarenteeValue = sc.nextInt();
 			System.out.println("Enter the amount of loan you wish to apply for");
 			int amtLoan = sc.nextInt();
-			LoanProgramsOffered obj=lService.getLoanProgramByName(prog);
+			
 			double min=obj.getMinloanamount();
 			double max=obj.getMaxloanamount();
 			lService.validateLoanAmount(min, max, amtLoan);
